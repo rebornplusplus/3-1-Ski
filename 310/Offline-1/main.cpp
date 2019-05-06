@@ -153,7 +153,7 @@ class ScopeTable {
     }
 
     ~ScopeTable() {
-        if(root) delete root;
+        if(root) delete[] root;
         --count;
         prev = nullptr;
     }
@@ -228,7 +228,7 @@ class SymbolTable {
 int main() {
 
     // freopen("in.txt", "r", stdin);
-    // freopen("out.txt", "w", stdout);
+    // freopen("mine.txt", "w", stdout);
 
     int n;
     cin >> n;
