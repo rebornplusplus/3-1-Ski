@@ -1,0 +1,4 @@
+```
+.MODEL SMAL
+.STACK 100H
+```
