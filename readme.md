@@ -9,4 +9,4 @@
  - [CSE310: Compiler Sessional](./310)
  - CSE311: Data Communication
  - CSE315: Microprocessors, Microcontrollers and Embedded Systems
- - CSE316: Microprocessors, Microcontrollers and Embedded Systems Sessional
+ - [CSE316: Microprocessors, Microcontrollers and Embedded Systems Sessional](./316)
