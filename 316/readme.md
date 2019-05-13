@@ -1,0 +1,5 @@
+```
+MOV AH, 2
+MOV DL, 48
+INT 21H
+```
