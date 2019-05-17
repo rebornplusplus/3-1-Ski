@@ -1,6 +1,7 @@
 Simple calculator
 
 ```bash
+$ make
 $ ./xen 
 2 + 5 -6
 = 1
