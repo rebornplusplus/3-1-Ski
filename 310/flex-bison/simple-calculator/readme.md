@@ -1,4 +1,5 @@
 Simple calculator
+_`calculation_scanner.l`, `calculator.y` are necessary for `Makefile`_
 
 ```bash
 $ make
