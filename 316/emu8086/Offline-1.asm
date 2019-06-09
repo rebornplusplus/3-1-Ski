@@ -15,6 +15,7 @@
     N DW ?
     CNT DW ?
     I DW ?
+    MSG DW "RESULT: $"
     
 .CODE
     MAIN PROC
@@ -177,6 +178,53 @@
         ; PROBLEM SOLVED
         
         MOV CX, MAX
+        
+        ; PRINT THE RESULT
+        
+        ; NEW LINE
+        MOV AH, 2
+        MOV DX, 10
+        INT 21H
+        
+        ; RESULT = 
+        LEA DX, MSG
+        MOV AH, 9
+        INT 21H
+        
+        MOV AX, MAX
+        MOV I, AX
+        MOV TEMP, 10000
+        
+        PRINT_RESULT:
+            MOV AX, TEMP
+            CMP AX, 0
+            JE DONE_PRINT_RESULT
+            
+            MOV AX, I
+            MOV DX, 0
+            MOV CX, TEMP
+            DIV CX
+            
+            MOV I, DX
+            
+            MOV DX, AX
+            ADD DX, 48
+            MOV AH, 2
+            INT 21H
+            
+            MOV DX, 0
+            MOV AX, TEMP
+            MOV CX, 10
+            DIV CX
+            MOV TEMP, AX
+            
+            JMP PRINT_RESULT
+            
+        DONE_PRINT_RESULT:
+        
+        MOV AH, 2
+        MOV DX, 10
+        INT 21H
         
         ; RETURN 0
         MOV AH, 4CH
