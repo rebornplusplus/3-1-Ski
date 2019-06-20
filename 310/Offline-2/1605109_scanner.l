@@ -326,6 +326,14 @@ continue 	{
 		BEGIN(INITIAL);
 		cur_yytext = "";
 	}
+	
+<SL_COMMENT><<EOF>> 	{
+		f_logs << "Line No. " << start_line << ": Token <" << "COMMENT";
+		f_logs << "> Lexeme " << cur_yytext << " found\n\n";
+		
+		BEGIN(INITIAL);
+		cur_yytext = "";
+	}
 
  /* END: Single Line COMMENT definitions */
 
