@@ -1,0 +1,8 @@
+Error at line 2: Identifier bar declaration not found
+Error at line 12: Multiple declaration of oops
+Error at line 18: Multiple declaration of func
+Error at line 22: Multiple declaration of func
+Error at line 47: Identifier cnt declaration not found
+Error at line 48: Identifier cnt declaration not found
+Error at line 50: Identifier cnt declaration not found
+Error at line 51: Identifier cnt declaration not found

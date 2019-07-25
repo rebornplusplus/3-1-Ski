@@ -13,6 +13,10 @@ class ParameterList {
 		parameter_types.push_back(parameter_type);
 	}
 
+	void set_parameters(vector<string> parameters) {
+		parameter_types = parameters;
+	}
+
 	vector<string> get_types() {
 		return parameter_types;
 	}

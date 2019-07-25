@@ -16,7 +16,7 @@ class SymbolInfo {
     public:
 
     SymbolInfo* next;
-	ParameterList *parameters;
+	ParameterList parameters;
 
     SymbolInfo(string _name="", string _type="") : name(_name), type(_type), next(nullptr) { }
 
@@ -24,10 +24,11 @@ class SymbolInfo {
         name = p.name;
         type = p.type;
         next = nullptr;
-		parameters = nullptr;
+		parameters = p.parameters;
     }
 
-    string get_name() const { return name; }
+    void set_type(string _type) { type = _type; }
+	string get_name() const { return name; }
     string get_type() const { return type; }
 
     bool operator == (const SymbolInfo &p) const {

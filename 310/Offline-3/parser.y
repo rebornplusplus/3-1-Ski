@@ -12,22 +12,20 @@
 	
 	typedef SymbolInfo* pointer_type;
 
-	SymbolTable st(7);
+	SymbolTable symbol_table(7);
+	SymbolTable identifer_types(7);
+
+	void add_scope() { symbol_table.enter_scope(); identifer_types.enter_scope(); }
+	void remove_scope() { symbol_table.exit_scope(); identifer_types.exit_scope(); }
 	
 	ParameterList temp_parameter_list;
+	pointer_type parameter_identifers = nullptr;
+	string cur_type_specifier = "INT";
 
 	ofstream f_log("log.txt");
+	ofstream f_err("error.txt");
 
 	void prnt(string rule, SymbolInfo* ptr) {
-		// pointer_type temp = ptr;
-		// while(temp) {
-		// 	f_log << " ";
-		// 	temp->print(f_log);
-		// 	f_log << " ";
-
-		// 	temp = temp->next;
-		// }
-
 		static int space_prefix = 0;
 
 		f_log << "At line no: " << yylineno << " \t" << rule << "\n";
@@ -52,6 +50,12 @@
 		f_log << "\n\n";
 	}
 
+	extern int tot_err;
+	void prnt_err(string msg) {
+		f_err << "Error at line " << yylineno << ": " << msg << "\n";
+		++tot_err;
+	}
+
 	void append(pointer_type a, pointer_type b) {
 		pointer_type cur = a, prev = nullptr;
 		while(cur) {
@@ -59,6 +63,54 @@
 			cur = cur->next;
 		}
 		prev->next = b;
+	}
+
+	void add_parameter_identifiers() {
+		pointer_type cur = parameter_identifers, prev = nullptr;
+		while(cur) {
+			if(cur->get_type() == "ID") {
+				f_log << "INSERT IDENTIFIER: " << prev->get_type() << " " << cur->get_name() << "\n";
+				assert(prev != nullptr);
+				bool flag = symbol_table.insert(*cur);
+				if(!flag) prnt_err("Multiple declaration of " + cur->get_name());
+				else identifer_types.insert(SymbolInfo(cur->get_name(), prev->get_type()));
+			}
+			prev = cur;
+			cur = cur->next;
+		}
+		parameter_identifers = nullptr;
+	}
+
+	void add_new_func_declaration(pointer_type type, pointer_type id) {
+		SymbolInfo ob = *id;
+		ob.parameters = temp_parameter_list;
+
+		bool flag = symbol_table.insert(ob);
+		if(!flag) prnt_err("Multiple declaration of " + id->get_name());
+		else {
+			ob.set_type(type->get_type());
+			identifer_types.insert(ob);
+		}
+	}
+
+	void add_new_func_definition(pointer_type type, pointer_type id) {
+		SymbolInfo ob = *id;
+		ob.parameters = temp_parameter_list;
+
+		bool flag = symbol_table.insert(ob);
+		if(!flag) {
+			pointer_type ret = identifer_types.search(ob.get_name());
+			assert(ret != nullptr);	// this must hold!
+			if(ret->get_type() != type->get_type() or !(ret->parameters == ob.parameters)) {
+				prnt_err("Multiple declaration of " + ob.get_name());
+			}
+		}
+		else {
+			ob.set_type(type->get_type());
+			identifer_types.insert(ob);
+		}
+
+		temp_parameter_list.clear();
 	}
 %}
 
@@ -137,6 +189,8 @@ unit:
      
 func_declaration:
 	type_specifier ID LPAREN parameter_list RPAREN SEMICOLON {
+		add_new_func_declaration($1, $2);
+
 		append($1, $2);
 		append($2, $3);
 		append($3, $4);
@@ -152,6 +206,8 @@ func_declaration:
 		// also the parameters
 	}
 	| type_specifier ID LPAREN RPAREN SEMICOLON {
+		add_new_func_declaration($1, $2);
+
 		append($1, $2);
 		append($2, $3);
 		append($3, $4);
@@ -168,24 +224,24 @@ func_declaration:
 	;
 		 
 func_definition:
-	type_specifier ID LPAREN parameter_list RPAREN compound_statement {
+	type_specifier ID LPAREN parameter_list RPAREN { add_new_func_definition($1, $2); } compound_statement {
 		append($1, $2);
 		append($2, $3);
 		append($3, $4);
 		append($4, $5);
-		append($5, $6);
-		append($6, nullptr);
+		append($5, $7);
+		append($7, nullptr);
 
 		$$ = $1;
 
 		prnt("func_definition: type_specifier ID LPAREN parameter_list RPAREN compound_statement", $$);
 	}
-	| type_specifier ID LPAREN RPAREN compound_statement {
+	| type_specifier ID LPAREN RPAREN { add_new_func_definition($1, $2); } compound_statement {
 		append($1, $2);
 		append($2, $3);
 		append($3, $4);
-		append($4, $5);
-		append($5, nullptr);
+		append($4, $6);
+		append($6, nullptr);
 
 		$$ = $1;
 
@@ -195,6 +251,9 @@ func_definition:
 
 parameter_list:
 	parameter_list COMMA type_specifier ID {
+		parameter_identifers = $1;
+		temp_parameter_list.add_parameter($3->get_type());
+
 		append($1, $2);
 		append($2, $3);
 		append($3, $4);
@@ -203,10 +262,11 @@ parameter_list:
 		$$ = $1;
 
 		prnt("parameter_list: parameter_list COMMA type_specifier ID", $$);
-
-		temp_parameter_list.add_parameter($3->get_type());
 	}
 	| parameter_list COMMA type_specifier {
+		parameter_identifers = $1;
+		temp_parameter_list.add_parameter($3->get_type());
+
 		append($1, $2);
 		append($2, $3);
 		append($3, nullptr);
@@ -214,38 +274,40 @@ parameter_list:
 		$$ = $1;
 
 		prnt("parameter_list: parameter_list COMMA type_specifier", $$);
-
-		temp_parameter_list.add_parameter($3->get_type());
 	}
 	| type_specifier ID {
+		parameter_identifers = $1;
+		temp_parameter_list.clear();
+		temp_parameter_list.add_parameter($1->get_type());
+
 		append($1, $2);
 		append($2, nullptr);
 
 		$$ = $1;
 
 		prnt("parameter_list: type_specifier ID", $$);
-
-		temp_parameter_list.clear();
-		temp_parameter_list.add_parameter($1->get_type());
 	}
 	| type_specifier {
+		parameter_identifers = $1;
+		temp_parameter_list.clear();
+		temp_parameter_list.add_parameter($1->get_type());
+
 		append($1, nullptr);
 
 		$$ = $1;
 
 		prnt("parameter_list: type_specifier", $$);
-
-		temp_parameter_list.clear();
-		temp_parameter_list.add_parameter($1->get_type());
 	}
 	;
 
 
 compound_statement:
-	LCURL statements RCURL {
-		append($1, $2);
-		append($2, $3);
-		append($3, nullptr);
+	LCURL { f_log << "compound_statement begins!\n"; add_scope(); add_parameter_identifiers(); } statements RCURL {
+		remove_scope();
+
+		append($1, $3);
+		append($3, $4);
+		append($4, nullptr);
 		
 		$$ = $1;
 
@@ -275,6 +337,8 @@ var_declaration:
  		 
 type_specifier:
 	INT {
+		cur_type_specifier = "INT";
+
 		append($1, nullptr);
 
 		$$ = $1;
@@ -282,6 +346,8 @@ type_specifier:
 		prnt("type_specifier: INT", $$);
 	}
 	| FLOAT {
+		cur_type_specifier = "FLOAT";
+
 		append($1, nullptr);
 
 		$$ = $1;
@@ -289,6 +355,8 @@ type_specifier:
 		prnt("type_specifier: FLOAT", $$);
 	}
 	| VOID {
+		cur_type_specifier = "VOID";
+
 		append($1, nullptr);
 
 		$$ = $1;
@@ -299,7 +367,9 @@ type_specifier:
  		
 declaration_list:
 	declaration_list COMMA ID {
-		st.insert(*($3));
+		bool flag = symbol_table.insert(*($3));
+		if(!flag) prnt_err("Multiple declaration of " + $3->get_name());
+		else identifer_types.insert(SymbolInfo($3->get_name(), cur_type_specifier));
 		
 		append($1, $2);
 		append($2, $3);
@@ -310,7 +380,9 @@ declaration_list:
 		prnt("declaration_list: declaration_list COMMA ID", $$);
 	}
 	| declaration_list COMMA ID LTHIRD CONST_INT RTHIRD {
-		st.insert(*($3));
+		bool flag = symbol_table.insert(*($3));
+		if(!flag) prnt_err("Multiple declaration of " + $3->get_name());
+		else identifer_types.insert(SymbolInfo($3->get_name(), cur_type_specifier));
 
 		append($1, $2);
 		append($2, $3);
@@ -324,7 +396,9 @@ declaration_list:
 		prnt("declaration_list: declaration_list COMMA ID LTHIRD CONST_INT RTHIRD", $$);
 	}
 	| ID {
-		st.insert(*($1));
+		bool flag = symbol_table.insert(*($1));
+		if(!flag) prnt_err("Multiple declaration of " + $1->get_name());
+		else identifer_types.insert(SymbolInfo($1->get_name(), cur_type_specifier));
 
 		append($1, nullptr);
 		
@@ -333,7 +407,9 @@ declaration_list:
 		prnt("declaration_list: ID", $$);
 	}
 	| ID LTHIRD CONST_INT RTHIRD {
-		st.insert(*($1));
+		bool flag = symbol_table.insert(*($1));
+		if(!flag) prnt_err("Multiple declaration of " + $1->get_name());
+		else identifer_types.insert(SymbolInfo($1->get_name(), cur_type_specifier));
 
 		append($1, $2);
 		append($2, $3);
@@ -435,6 +511,9 @@ statement:
 		prnt("statement: WHILE LPAREN expression RPAREN statement", $$);
 	}
 	| PRINTLN LPAREN ID RPAREN SEMICOLON {
+		pointer_type ret = symbol_table.search($3->get_name());
+		if(ret == nullptr) prnt_err("Identifier " + $3->get_name() + " declaration not found");
+
 		append($1, $2);
 		append($2, $3);
 		append($3, $4);
@@ -476,6 +555,9 @@ expression_statement:
 	  
 variable:
 	ID {
+		pointer_type ret = symbol_table.search($1->get_name());
+		if(ret == nullptr) prnt_err("Identifier " + $1->get_name() + " declaration not found");
+
 		append($1, nullptr);
 
 		$$ = $1;
@@ -483,6 +565,11 @@ variable:
 		prnt("variable: ID", $$);
 	}
 	| ID LTHIRD expression RTHIRD {
+		pointer_type ret = symbol_table.search($1->get_name());
+		if(ret == nullptr) prnt_err("Identifier " + $1->get_name() + " declaration not found");
+
+		// array index here
+
 		append($1, $2);
 		append($2, $3);
 		append($3, $4);
@@ -503,6 +590,8 @@ expression:
 		prnt("expression: logic_expression", $$);
 	}
 	| variable ASSIGNOP logic_expression {
+		// check variable type here
+
 		append($1, $2);
 		append($2, $3);
 		append($3, nullptr);
@@ -624,6 +713,11 @@ factor:
 		prnt("factor: variable", $$);
 	}
 	| ID LPAREN argument_list RPAREN {
+		pointer_type ret = symbol_table.search($1->get_name());
+		if(ret == nullptr) prnt_err("Identifier " + $1->get_name() + " declaration not found");
+
+		// function type checking here
+
 		append($1, $2);
 		append($2, $3);
 		if($3 == nullptr) append($2, $4);
