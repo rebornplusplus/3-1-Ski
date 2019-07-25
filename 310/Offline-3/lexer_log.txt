@@ -1,0 +1,6 @@
+Line No. 1: Token <ID> Lexeme a found
+
+Line No. 1: Token <LTHIRD> Lexeme [ found
+
+Line No. 1: Token <RTHIRD> Lexeme ] found
+

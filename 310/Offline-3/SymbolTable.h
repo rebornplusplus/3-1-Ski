@@ -7,6 +7,7 @@
 **/
 
 #include <bits/stdc++.h>
+#include "ParameterList.h"
 using namespace std;
 
 class SymbolInfo {
@@ -15,6 +16,7 @@ class SymbolInfo {
     public:
 
     SymbolInfo* next;
+	ParameterList *parameters;
 
     SymbolInfo(string _name="", string _type="") : name(_name), type(_type), next(nullptr) { }
 
@@ -22,6 +24,7 @@ class SymbolInfo {
         name = p.name;
         type = p.type;
         next = nullptr;
+		parameters = nullptr;
     }
 
     string get_name() const { return name; }

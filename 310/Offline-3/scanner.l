@@ -13,18 +13,16 @@
 
 %{
 	#include <bits/stdc++.h>
-	#include "1605109_SymbolTable.h"
+	#include "SymbolTable.h"
+	#include "parser.tab.h"
 	using namespace std;
-
-	/* SymbolTable of 7 blocks */
-	SymbolTable st(7);
 	
 	/* total errors */
 	int tot_err = 0;
 	
 	/* log and token file */
-	ofstream f_token("1605109_tokens.txt");
-	ofstream f_logs("1605109_log.txt");
+	ofstream lex_tokens("lexer_tokens.txt");
+	ofstream lex_log("lexer_log.txt");
 	
 	/* Current string, yytext */
 	string cur_str = "", cur_yytext = "";
@@ -56,27 +54,24 @@
 	
 	/* Does the printing */
 	void prnt(string c_token, string log_yytext=yytext, string c_yytext=yytext, bool c_keyword=false, bool multi_line = false) {
-		f_token << "<" << c_token;
-		if(!c_keyword) f_token << ", " << c_yytext;
-		f_token << "> ";
-		f_logs << "Line No. " << (multi_line ? start_line : yylineno) << ": Token <" << c_token;
-		f_logs << "> Lexeme " << log_yytext << " found\n\n";
+		lex_tokens << "<" << c_token;
+		if(!c_keyword) lex_tokens << ", " << c_yytext;
+		lex_tokens << "> ";
+		lex_log << "Line No. " << (multi_line ? start_line : yylineno) << ": Token <" << c_token;
+		lex_log << "> Lexeme " << log_yytext << " found\n\n";
 	}
 	
 	/* Prints error */
 	void prnt_err(string err_msg, string c_yytext=yytext, bool multi_line=false) {
-		f_logs << "Error at line " << (multi_line ? start_line : yylineno) << ": " << err_msg << " " << c_yytext << "\n\n"; 
+		lex_log << "Error at line " << (multi_line ? start_line : yylineno) << ": " << err_msg << " " << c_yytext << "\n\n"; 
 		++tot_err;
 	}
 	
 	/* take care of punctuations */
 	void prnt_punct(string c_token) {
 		prnt(c_token);
-		if(st.insert(SymbolInfo(yytext, c_token))) {
-			st.print_current_scope(f_logs);
-		}
 	}
-%}	
+%}
 
  /* Little thingies */
 
@@ -104,28 +99,26 @@ CHAR (\'([^'"\\\n\t]|{BACKSLASH_CONST})\')
  /* ignore whitespaces */
 [ \t\n] { }
 
+print2342384 	{ yylval.info = new SymbolInfo(yytext, "PRINTLN"); return PRINTLN; }
 
  /* START: KEYWORDS */
 
-if |
-for |
-do |
-int |
-float |
-void |
-switch |
-default |
-else |
-while |
-break |
-char |
-double |
-return |
-case |
-continue 	{
-		string c_token = str_uppper(yytext);
-		prnt(c_token, yytext, yytext, true);
-	}
+if 			{ yylval.info = new SymbolInfo(yytext, "IF"); return IF;}
+for 		{ yylval.info = new SymbolInfo(yytext, "FOR"); return FOR; }
+do 			{ yylval.info = new SymbolInfo(yytext, "DO"); return DO; }
+int 		{ yylval.info = new SymbolInfo(yytext, "INT"); return INT; }
+float 		{ yylval.info = new SymbolInfo(yytext, "FLOAT"); return FLOAT; }
+void 		{ yylval.info = new SymbolInfo(yytext, "VOID"); return VOID; }
+switch 		{ yylval.info = new SymbolInfo(yytext, "SWITCH"); return SWITCH; }
+default 	{ yylval.info = new SymbolInfo(yytext, "DEFAULT"); return DEFAULT; }
+else 		{ yylval.info = new SymbolInfo(yytext, "ELSE"); return ELSE; }
+while 		{ yylval.info = new SymbolInfo(yytext, "WHILE"); return WHILE; }
+break 		{ yylval.info = new SymbolInfo(yytext, "BREAK"); return BREAK; }
+char 		{ yylval.info = new SymbolInfo(yytext, "CHAR"); return CHAR; }
+double 		{ yylval.info = new SymbolInfo(yytext, "DOUBLE"); return DOUBLE; }
+return 		{ yylval.info = new SymbolInfo(yytext, "RETURN"); return RETURN; }
+case 		{ yylval.info = new SymbolInfo(yytext, "CASE"); return CASE; }
+continue 	{ yylval.info = new SymbolInfo(yytext, "CONTINUE"); return CONTINUE; }
 
  /* END: KEYWORDS */
  
@@ -134,9 +127,8 @@ continue 	{
 {DIGIT}+ 	{
 		string c_token = "CONST_INT";
 		prnt(c_token);
-		if(st.insert(SymbolInfo(yytext, c_token))) {
-			st.print_current_scope(f_logs);
-		}
+		yylval.info = new SymbolInfo(yytext, c_token);
+		return CONST_INT;
 	}
 
  /* Floating numbers */
@@ -144,9 +136,8 @@ continue 	{
 {DECIMAL}{EXP}? 	{
 		string c_token = "CONST_FLOAT";
 		prnt(c_token);
-		if(st.insert(SymbolInfo(yytext, c_token))) {
-			st.print_current_scope(f_logs);
-		}
+		yylval.info = new SymbolInfo(yytext, c_token);
+		return CONST_FLOAT;
 	}
 ({DECIMAL}|{TOO_MANY_DECIMAL})?{EXP_ERR} {
 		prnt_err("Ill formed number");
@@ -163,9 +154,8 @@ continue 	{
 		c_yytext = c_yytext.substr(1, 1);
 		
 		prnt(c_token, yytext, c_yytext);
-		if(st.insert(SymbolInfo(c_yytext, c_token))) {
-			st.print_current_scope(f_logs);
-		}
+		yylval.info = new SymbolInfo(c_yytext, c_token);
+		return CONST_CHAR;
 	}
 \'{BACKSLASH_CONST}\' {
 		string c_token = "CONST_CHAR";
@@ -175,9 +165,8 @@ continue 	{
 		c_yytext += ch;
 		
 		prnt(c_token, yytext, c_yytext);
-		if(st.insert(SymbolInfo(c_yytext, c_token))) {
-			st.print_current_scope(f_logs);
-		}
+		yylval.info = new SymbolInfo(c_yytext, c_token);
+		return CONST_CHAR;
 	}
 \'\' 	{
 		prnt_err("Empty character constant error");
@@ -193,22 +182,55 @@ continue 	{
  
  /* START: Operator & Punctuations */
 
-"+"|"-" 	{ prnt_punct("ADDOP"); }
-"*"|"/"|"%" 	{ prnt_punct("MULOP"); }
-"++"|"--" 	{ prnt_punct("INCOP"); }
-"<"|"<="|">"|">="|"=="|"!=" 	{ prnt_punct("RELOP"); }
-"=" 	{ prnt_punct("ASSIGNOP"); }
-"&&"|"||" 	{ prnt_punct("LOGICOP"); }
-"&"|"|"|"^"|"<<"|">>" 	{ prnt_punct("BITOP"); }
-"!" 	{ prnt_punct("NOT"); }
-"(" 	{ prnt_punct("LPAREN"); }
-")" 	{ prnt_punct("RPAREN"); }
-"{" 	{ prnt_punct("LCURL"); }
-"}" 	{ prnt_punct("RCURL"); }
-"[" 	{ prnt_punct("LTHIRD"); }
-"]" 	{ prnt_punct("RTHIRD"); }
-"," 	{ prnt_punct("COMMA"); }
-";" 	{ prnt_punct("SEMICOLON"); }
+"+"|"-" 	{
+		prnt_punct("ADDOP");
+		yylval.info = new SymbolInfo(yytext, "ADDOP");
+		return ADDOP;
+	}
+"*"|"/"|"%" 	{
+		prnt_punct("MULOP");
+		yylval.info = new SymbolInfo(yytext, "MULOP");
+		return MULOP;
+	}
+"++" 	{
+		prnt_punct("INCOP");
+		yylval.info = new SymbolInfo(yytext, "INCOP");
+		return INCOP;
+	}
+"--" 	{
+		prnt_punct("DECOP");
+		yylval.info = new SymbolInfo(yytext, "DECOP");
+		return DECOP;
+	}
+"<"|"<="|">"|">="|"=="|"!=" 	{
+		prnt_punct("RELOP");
+		yylval.info = new SymbolInfo(yytext, "RELOP");
+		return RELOP;
+	}
+"=" 	{
+		prnt_punct("ASSIGNOP");
+		yylval.info = new SymbolInfo(yytext, "ASSIGNOP");
+		return ASSIGNOP;
+	}
+"&&"|"||" 	{
+		prnt_punct("LOGICOP");
+		yylval.info = new SymbolInfo(yytext, "LOGICOP");
+		return LOGICOP;
+	}
+"&"|"|"|"^"|"<<"|">>" 	{
+		prnt_punct("BITOP");
+		yylval.info = new SymbolInfo(yytext, "BITOP");
+		return BITOP;
+	}
+"!" 	{ prnt_punct("NOT"); yylval.info = new SymbolInfo(yytext, "NOT"); return NOT; }
+"(" 	{ prnt_punct("LPAREN"); yylval.info = new SymbolInfo(yytext, "LPAREN"); return LPAREN; }
+")" 	{ prnt_punct("RPAREN"); yylval.info = new SymbolInfo(yytext, "RPAREN"); return RPAREN; }
+"{" 	{ prnt_punct("LCURL"); yylval.info = new SymbolInfo(yytext, "LCURL"); return LCURL; }
+"}" 	{ prnt_punct("RCURL"); yylval.info = new SymbolInfo(yytext, "RCURL"); return RCURL; }
+"[" 	{ prnt_punct("LTHIRD"); yylval.info = new SymbolInfo(yytext, "LTHIRD"); return LTHIRD; }
+"]" 	{ prnt_punct("RTHIRD"); yylval.info = new SymbolInfo(yytext, "RTHIRD"); return RTHIRD; }
+"," 	{ prnt_punct("COMMA"); yylval.info = new SymbolInfo(yytext, "COMMA"); return COMMA; }
+";" 	{ prnt_punct("SEMICOLON"); yylval.info = new SymbolInfo(yytext, "SEMICOLON"); return SEMICOLON; }
 
  /* END: Operator and Punctuations */
  
@@ -217,9 +239,8 @@ continue 	{
 ({ALPHA}|"_")+({ALPHANUMERIC}|"_")* 	{
 		string c_token = "ID";
 		prnt(c_token);
-		if(st.insert(SymbolInfo(yytext, c_token))) {
-			st.print_current_scope(f_logs);
-		}
+		yylval.info = new SymbolInfo(yytext, "ID");
+		return ID;
 	}
 {DIGIT}+({ALPHANUMERIC}|"_")+ 	{
 		prnt_err("Invalid prefix on ID or invalid suffix on Number");
@@ -294,8 +315,8 @@ continue 	{
 
 <COMMENT>(\*\/) 	{
 		cur_yytext += yytext;
-		f_logs << "Line No. " << start_line << ": Token <" << "COMMENT";
-		f_logs << "> Lexeme " << cur_yytext << " found\n\n";
+		lex_log << "Line No. " << start_line << ": Token <" << "COMMENT";
+		lex_log << "> Lexeme " << cur_yytext << " found\n\n";
 
 		BEGIN(INITIAL);
 		cur_yytext = "";
@@ -320,16 +341,16 @@ continue 	{
 	}
 
 <SL_COMMENT>\n 	{
-		f_logs << "Line No. " << start_line << ": Token <" << "COMMENT";
-		f_logs << "> Lexeme " << cur_yytext << " found\n\n";
+		lex_log << "Line No. " << start_line << ": Token <" << "COMMENT";
+		lex_log << "> Lexeme " << cur_yytext << " found\n\n";
 		
 		BEGIN(INITIAL);
 		cur_yytext = "";
 	}
 	
 <SL_COMMENT><<EOF>> 	{
-		f_logs << "Line No. " << start_line << ": Token <" << "COMMENT";
-		f_logs << "> Lexeme " << cur_yytext << " found\n\n";
+		lex_log << "Line No. " << start_line << ": Token <" << "COMMENT";
+		lex_log << "> Lexeme " << cur_yytext << " found\n\n";
 		
 		BEGIN(INITIAL);
 		cur_yytext = "";
@@ -343,24 +364,24 @@ continue 	{
 
 %%
 
-int main(int argc, char **argv) {
-	if(argc > 1) {
-		if(!(yyin = fopen(argv[1], "r"))) {
-			cout << "Error! Can't open file \"argv[1]\"\n";
-			return 1;
-		}
-	}
+// int main(int argc, char **argv) {
+// 	if(argc > 1) {
+// 		if(!(yyin = fopen(argv[1], "r"))) {
+// 			cout << "Error! Can't open file \"argv[1]\"\n";
+// 			return 1;
+// 		}
+// 	}
 
-	cur_str = "";
-	yylineno = 1;
-	yylex();
+// 	cur_str = "";
+// 	yylineno = 1;
+// 	yylex();
 	
-	f_token << "\n";
-	f_logs << "Total Lines: " << yylineno-1 << "\n";
-	f_logs << "Total Errors: " << tot_err << "\n";
+// 	lex_tokens << "\n";
+// 	lex_log << "Total Lines: " << yylineno-1 << "\n";
+// 	lex_log << "Total Errors: " << tot_err << "\n";
 	
-	f_token.close();
-	f_logs.close();
+// 	lex_tokens.close();
+// 	lex_log.close();
 
-	return 0;
-}
+// 	return 0;
+// }

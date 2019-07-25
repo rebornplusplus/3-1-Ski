@@ -1,0 +1,4 @@
+At line no: 1 	type_specifier: INT
+
+int 
+
