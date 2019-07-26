@@ -1,8 +1,12 @@
-Error at line 2: Identifier bar declaration not found
-Error at line 12: Multiple declaration of oops
-Error at line 18: Multiple declaration of func
-Error at line 22: Multiple declaration of func
-Error at line 47: Identifier cnt declaration not found
-Error at line 48: Identifier cnt declaration not found
-Error at line 50: Identifier cnt declaration not found
-Error at line 51: Identifier cnt declaration not found
+Error at line 6: Multiple declaration of c
+Error at line 7: Non-integer array index
+Error at line 7: INT = INT
+Error at line 8: Type conversion
+Error at line 8: INT = FLOAT
+Error at line 9: Non-integer operand on modulus operator
+Error at line 9: INT = ERROR
+Error at line 10: Type conversion
+Error at line 10: INT* = INT
+Error at line 11: Function arguments don't match with declared parameter types
+Error at line 12: Identifier b not declared
+Error at line 12: ERROR = INT

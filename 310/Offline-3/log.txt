@@ -1,75 +1,84 @@
-At line no: 1 	type_specifier: VOID
+At line no: 1 	type_specifier: INT
 
-void 
+int 
+
+At line no: 1 	type_specifier: INT
+
+int 
+
+At line no: 1 	parameter_list: type_specifier ID
+
+int a 
 
 compound_statement begins!
+INSERT IDENTIFIER: INT a
 At line no: 2 	variable: ID
 
-bar 
+a 
 
 At line no: 2 	factor: variable
 
-bar 
+a 
 
 At line no: 2 	unary_expression: factor
 
-bar 
+a 
 
 At line no: 2 	term: unary_expression
 
-bar 
+a 
 
 At line no: 2 	simple_expression: term
 
-bar 
+a 
 
 At line no: 2 	rel_expression: simple_expression
 
-bar 
+a 
 
 At line no: 2 	logic_expression: rel_expression
 
-bar 
+a 
 
 At line no: 2 	expression: logic_expression
 
-bar 
+a 
 
 At line no: 2 	statement: RETURN expression SEMICOLON
 
-return bar ; 
+return a ; 
 
 
 At line no: 2 	statements: statement
 
-return bar ; 
+return a ; 
 
 
 At line no: 3 	compound_statement: LCURL statements RCURL
 
 { 
-  return bar ; 
+  return a ; 
 } 
 
 
-At line no: 3 	func_definition: type_specifier ID LPAREN RPAREN compound_statement
+At line no: 3 	func_definition: type_specifier ID LPAREN parameter_list RPAREN compound_statement
 
-void foo ( ) { 
-  return bar ; 
+int func ( int a ) { 
+  return a ; 
 } 
 
 
 At line no: 3 	unit: func_definition
 
-void foo ( ) { 
-  return bar ; 
+int func ( int a ) { 
+  return a ; 
 } 
 
 
 At line no: 3 	program: unit
 
-void foo ( ) { 
-  return bar ; 
+int func ( int a ) { 
+  return a ; 
 } 
 
 
@@ -77,2465 +86,570 @@ At line no: 5 	type_specifier: INT
 
 int 
 
-At line no: 5 	type_specifier: INT
+compound_statement begins!
+At line no: 6 	type_specifier: INT
 
 int 
 
-At line no: 5 	parameter_list: type_specifier ID
+At line no: 6 	declaration_list: ID LTHIRD CONST_INT RTHIRD
 
-int x 
+a [ 2 ] 
 
-compound_statement begins!
-INSERT IDENTIFIER: INT x
-At line no: 6 	variable: ID
+At line no: 6 	declaration_list: declaration_list COMMA ID
 
-x 
+a [ 2 ] , c 
 
-At line no: 6 	factor: variable
+At line no: 6 	declaration_list: declaration_list COMMA ID
 
-x 
+a [ 2 ] , c , i 
 
-At line no: 6 	unary_expression: factor
+At line no: 6 	declaration_list: declaration_list COMMA ID
 
-x 
+a [ 2 ] , c , i , j 
 
-At line no: 6 	term: unary_expression
+At line no: 6 	var_declaration: type_specifier declaration_list SEMICOLON
 
-x 
-
-At line no: 6 	simple_expression: term
-
-x 
-
-At line no: 6 	factor: CONST_INT
-
-0 
-
-At line no: 6 	unary_expression: factor
-
-0 
-
-At line no: 6 	term: unary_expression
-
-0 
-
-At line no: 6 	simple_expression: term
-
-0 
-
-At line no: 6 	rel_expression: simple_expression
-
-x < 0 
-
-At line no: 6 	logic_expression: rel_expression
-
-x < 0 
-
-At line no: 6 	expression: logic_expression
-
-x < 0 
-
-At line no: 6 	variable: ID
-
-x 
-
-At line no: 6 	factor: variable
-
-x 
-
-At line no: 6 	unary_expression: factor
-
-x 
-
-At line no: 6 	unary_expression: ADDOP unary_expression
-
-- x 
-
-At line no: 6 	term: unary_expression
-
-- x 
-
-At line no: 6 	simple_expression: term
-
-- x 
-
-At line no: 6 	rel_expression: simple_expression
-
-- x 
-
-At line no: 6 	logic_expression: rel_expression
-
-- x 
-
-At line no: 6 	expression: logic_expression
-
-- x 
-
-At line no: 6 	statement: RETURN expression SEMICOLON
-
-return - x ; 
+int a [ 2 ] , c , i , j ; 
 
 
-At line no: 7 	statement: IF LPAREN expression RPAREN statement
+At line no: 6 	statement: var_declaration
 
-if ( x < 0 ) return - x ; 
-
-
-At line no: 7 	statements: statement
-
-if ( x < 0 ) return - x ; 
+int a [ 2 ] , c , i , j ; 
 
 
-At line no: 7 	variable: ID
+At line no: 6 	statements: statement
 
-x 
+int a [ 2 ] , c , i , j ; 
 
-At line no: 7 	factor: variable
 
-x 
+At line no: 6 	type_specifier: FLOAT
+
+float 
+
+At line no: 6 	declaration_list: ID
+
+c 
+
+At line no: 6 	var_declaration: type_specifier declaration_list SEMICOLON
+
+float c ; 
+
+
+At line no: 6 	statement: var_declaration
+
+float c ; 
+
+
+At line no: 6 	statements: statements statement
+
+int a [ 2 ] , c , i , j ; 
+float c ; 
+
+
+At line no: 7 	factor: CONST_FLOAT
+
+2.5 
 
 At line no: 7 	unary_expression: factor
 
-x 
+2.5 
 
 At line no: 7 	term: unary_expression
 
-x 
+2.5 
 
 At line no: 7 	simple_expression: term
 
-x 
+2.5 
 
 At line no: 7 	rel_expression: simple_expression
 
-x 
+2.5 
 
 At line no: 7 	logic_expression: rel_expression
 
-x 
+2.5 
 
 At line no: 7 	expression: logic_expression
 
-x 
+2.5 
 
-At line no: 7 	statement: RETURN expression SEMICOLON
+At line no: 7 	variable: ID LTHIRD expression RTHIRD
 
-return x ; 
+a [ 2.5 ] 
+
+At line no: 7 	factor: CONST_INT
+
+1 
+
+At line no: 7 	unary_expression: factor
+
+1 
+
+At line no: 7 	term: unary_expression
+
+1 
+
+At line no: 7 	simple_expression: term
+
+1 
+
+At line no: 7 	rel_expression: simple_expression
+
+1 
+
+At line no: 7 	logic_expression: rel_expression
+
+1 
+
+At line no: 7 	expression: variable ASSIGNOP logic_expression
+
+a [ 2.5 ] = 1 
+
+At line no: 7 	expression_statement: expression SEMICOLON
+
+a [ 2.5 ] = 1 ; 
+
+
+At line no: 7 	statement: expression_statement
+
+a [ 2.5 ] = 1 ; 
 
 
 At line no: 7 	statements: statements statement
 
-if ( x < 0 ) return - x ; 
-return x ; 
+int a [ 2 ] , c , i , j ; 
+float c ; 
+a [ 2.5 ] = 1 ; 
 
 
-At line no: 8 	compound_statement: LCURL statements RCURL
+At line no: 8 	variable: ID
 
-{ 
-  if ( x < 0 ) return - x ; 
-  return x ; 
-} 
+i 
 
+At line no: 8 	factor: CONST_FLOAT
 
-At line no: 8 	func_definition: type_specifier ID LPAREN parameter_list RPAREN compound_statement
+2.3 
 
-int bar ( int x ) { 
-  if ( x < 0 ) return - x ; 
-  return x ; 
-} 
+At line no: 8 	unary_expression: factor
 
+2.3 
 
-At line no: 8 	unit: func_definition
+At line no: 8 	term: unary_expression
 
-int bar ( int x ) { 
-  if ( x < 0 ) return - x ; 
-  return x ; 
-} 
+2.3 
 
+At line no: 8 	simple_expression: term
 
-At line no: 8 	program: program unit
+2.3 
 
-void foo ( ) { 
-  return bar ; 
-} 
-int bar ( int x ) { 
-  if ( x < 0 ) return - x ; 
-  return x ; 
-} 
+At line no: 8 	rel_expression: simple_expression
 
+2.3 
 
-At line no: 10 	type_specifier: INT
+At line no: 8 	logic_expression: rel_expression
 
-int 
+2.3 
 
-At line no: 10 	declaration_list: ID
+At line no: 8 	expression: variable ASSIGNOP logic_expression
 
-oops 
+i = 2.3 
 
-At line no: 10 	var_declaration: type_specifier declaration_list SEMICOLON
+At line no: 8 	expression_statement: expression SEMICOLON
 
-int oops ; 
+i = 2.3 ; 
 
 
-At line no: 10 	unit: var_declaration
+At line no: 8 	statement: expression_statement
 
-int oops ; 
-
-
-At line no: 10 	program: program unit
-
-void foo ( ) { 
-  return bar ; 
-} 
-int bar ( int x ) { 
-  if ( x < 0 ) return - x ; 
-  return x ; 
-} 
-int oops ; 
+i = 2.3 ; 
 
 
-At line no: 12 	type_specifier: VOID
+At line no: 8 	statements: statements statement
 
-void 
+int a [ 2 ] , c , i , j ; 
+float c ; 
+a [ 2.5 ] = 1 ; 
+i = 2.3 ; 
 
-At line no: 12 	type_specifier: INT
 
-int 
+At line no: 9 	variable: ID
 
-At line no: 12 	parameter_list: type_specifier ID
+j 
 
-int pos 
+At line no: 9 	factor: CONST_INT
 
-compound_statement begins!
-INSERT IDENTIFIER: INT pos
-At line no: 13 	variable: ID
+2 
 
-oops 
+At line no: 9 	unary_expression: factor
 
-At line no: 13 	variable: ID
+2 
 
-pos 
+At line no: 9 	term: unary_expression
 
-At line no: 13 	factor: variable
+2 
 
-pos 
+At line no: 9 	factor: CONST_FLOAT
 
-At line no: 13 	unary_expression: factor
+3.7 
 
-pos 
+At line no: 9 	unary_expression: factor
 
-At line no: 13 	term: unary_expression
+3.7 
 
-pos 
+At line no: 9 	term: term MULOP unary_expression
+
+2 % 3.7 
+
+At line no: 9 	simple_expression: term
+
+2 % 3.7 
+
+At line no: 9 	rel_expression: simple_expression
+
+2 % 3.7 
+
+At line no: 9 	logic_expression: rel_expression
+
+2 % 3.7 
+
+At line no: 9 	expression: variable ASSIGNOP logic_expression
+
+j = 2 % 3.7 
+
+At line no: 9 	expression_statement: expression SEMICOLON
+
+j = 2 % 3.7 ; 
+
+
+At line no: 9 	statement: expression_statement
+
+j = 2 % 3.7 ; 
+
+
+At line no: 9 	statements: statements statement
+
+int a [ 2 ] , c , i , j ; 
+float c ; 
+a [ 2.5 ] = 1 ; 
+i = 2.3 ; 
+j = 2 % 3.7 ; 
+
+
+At line no: 10 	variable: ID
+
+a 
+
+At line no: 10 	factor: CONST_INT
+
+4 
+
+At line no: 10 	unary_expression: factor
+
+4 
+
+At line no: 10 	term: unary_expression
+
+4 
+
+At line no: 10 	simple_expression: term
+
+4 
+
+At line no: 10 	rel_expression: simple_expression
+
+4 
+
+At line no: 10 	logic_expression: rel_expression
+
+4 
+
+At line no: 10 	expression: variable ASSIGNOP logic_expression
+
+a = 4 
+
+At line no: 10 	expression_statement: expression SEMICOLON
+
+a = 4 ; 
+
+
+At line no: 10 	statement: expression_statement
+
+a = 4 ; 
+
+
+At line no: 10 	statements: statements statement
+
+int a [ 2 ] , c , i , j ; 
+float c ; 
+a [ 2.5 ] = 1 ; 
+i = 2.3 ; 
+j = 2 % 3.7 ; 
+a = 4 ; 
+
+
+At line no: 11 	variable: ID
+
+a 
+
+At line no: 11 	factor: variable
+
+a 
+
+At line no: 11 	unary_expression: factor
+
+a 
+
+At line no: 11 	term: unary_expression
+
+a 
+
+At line no: 11 	simple_expression: term
+
+a 
+
+At line no: 11 	rel_expression: simple_expression
+
+a 
+
+At line no: 11 	logic_expression: rel_expression
+
+a 
+
+At line no: 11 	arguments: arguments COMMA logic_expression
+
+a 
+
+At line no: 11 	argument_list: arguments
+
+a 
+
+At line no: 11 	factor: ID LPAREN argument_list RPAREN
+
+func ( a ) 
+
+At line no: 11 	unary_expression: factor
+
+func ( a ) 
+
+At line no: 11 	term: unary_expression
+
+func ( a ) 
+
+At line no: 11 	simple_expression: term
+
+func ( a ) 
+
+At line no: 11 	rel_expression: simple_expression
+
+func ( a ) 
+
+At line no: 11 	logic_expression: rel_expression
+
+func ( a ) 
+
+At line no: 11 	expression: logic_expression
+
+func ( a ) 
+
+At line no: 11 	expression_statement: expression SEMICOLON
+
+func ( a ) ; 
+
+
+At line no: 11 	statement: expression_statement
+
+func ( a ) ; 
+
+
+At line no: 11 	statements: statements statement
+
+int a [ 2 ] , c , i , j ; 
+float c ; 
+a [ 2.5 ] = 1 ; 
+i = 2.3 ; 
+j = 2 % 3.7 ; 
+a = 4 ; 
+func ( a ) ; 
+
+
+At line no: 12 	variable: ID
+
+b 
+
+At line no: 12 	factor: CONST_INT
+
+8 
+
+At line no: 12 	unary_expression: factor
+
+8 
+
+At line no: 12 	term: unary_expression
+
+8 
+
+At line no: 12 	simple_expression: term
+
+8 
+
+At line no: 12 	rel_expression: simple_expression
+
+8 
+
+At line no: 12 	logic_expression: rel_expression
+
+8 
+
+At line no: 12 	expression: variable ASSIGNOP logic_expression
+
+b = 8 
+
+At line no: 12 	expression_statement: expression SEMICOLON
+
+b = 8 ; 
+
+
+At line no: 12 	statement: expression_statement
+
+b = 8 ; 
+
+
+At line no: 12 	statements: statements statement
+
+int a [ 2 ] , c , i , j ; 
+float c ; 
+a [ 2.5 ] = 1 ; 
+i = 2.3 ; 
+j = 2 % 3.7 ; 
+a = 4 ; 
+func ( a ) ; 
+b = 8 ; 
+
 
 At line no: 13 	factor: CONST_INT
 
-9 
+0 
 
 At line no: 13 	unary_expression: factor
 
-9 
-
-At line no: 13 	term: term MULOP unary_expression
-
-pos * 9 
-
-At line no: 13 	simple_expression: term
-
-pos * 9 
-
-At line no: 13 	factor: CONST_FLOAT
-
-2.5 
-
-At line no: 13 	unary_expression: factor
-
-2.5 
+0 
 
 At line no: 13 	term: unary_expression
 
-2.5 
+0 
 
-At line no: 13 	simple_expression: simple_expression ADDOP term
+At line no: 13 	simple_expression: term
 
-pos * 9 + 2.5 
+0 
 
 At line no: 13 	rel_expression: simple_expression
 
-pos * 9 + 2.5 
+0 
 
 At line no: 13 	logic_expression: rel_expression
 
-pos * 9 + 2.5 
+0 
 
-At line no: 13 	expression: variable ASSIGNOP logic_expression
+At line no: 13 	expression: logic_expression
 
-oops = pos * 9 + 2.5 
+0 
 
-At line no: 13 	expression_statement: expression SEMICOLON
+At line no: 13 	statement: RETURN expression SEMICOLON
 
-oops = pos * 9 + 2.5 ; 
-
-
-At line no: 13 	statement: expression_statement
-
-oops = pos * 9 + 2.5 ; 
+return 0 ; 
 
 
-At line no: 13 	statements: statement
+At line no: 13 	statements: statements statement
 
-oops = pos * 9 + 2.5 ; 
+int a [ 2 ] , c , i , j ; 
+float c ; 
+a [ 2.5 ] = 1 ; 
+i = 2.3 ; 
+j = 2 % 3.7 ; 
+a = 4 ; 
+func ( a ) ; 
+b = 8 ; 
+return 0 ; 
 
 
 At line no: 14 	compound_statement: LCURL statements RCURL
 
 { 
-  oops = pos * 9 + 2.5 ; 
+  int a [ 2 ] , c , i , j ; 
+  float c ; 
+  a [ 2.5 ] = 1 ; 
+  i = 2.3 ; 
+  j = 2 % 3.7 ; 
+  a = 4 ; 
+  func ( a ) ; 
+  b = 8 ; 
+  return 0 ; 
 } 
 
 
-At line no: 14 	func_definition: type_specifier ID LPAREN parameter_list RPAREN compound_statement
+At line no: 14 	func_definition: type_specifier ID LPAREN RPAREN compound_statement
 
-void oops ( int pos ) { 
-  oops = pos * 9 + 2.5 ; 
+int main ( ) { 
+  int a [ 2 ] , c , i , j ; 
+  float c ; 
+  a [ 2.5 ] = 1 ; 
+  i = 2.3 ; 
+  j = 2 % 3.7 ; 
+  a = 4 ; 
+  func ( a ) ; 
+  b = 8 ; 
+  return 0 ; 
 } 
 
 
 At line no: 14 	unit: func_definition
 
-void oops ( int pos ) { 
-  oops = pos * 9 + 2.5 ; 
+int main ( ) { 
+  int a [ 2 ] , c , i , j ; 
+  float c ; 
+  a [ 2.5 ] = 1 ; 
+  i = 2.3 ; 
+  j = 2 % 3.7 ; 
+  a = 4 ; 
+  func ( a ) ; 
+  b = 8 ; 
+  return 0 ; 
 } 
 
 
 At line no: 14 	program: program unit
 
-void foo ( ) { 
-  return bar ; 
+int func ( int a ) { 
+  return a ; 
 } 
-int bar ( int x ) { 
-  if ( x < 0 ) return - x ; 
-  return x ; 
-} 
-int oops ; 
-void oops ( int pos ) { 
-  oops = pos * 9 + 2.5 ; 
-} 
-
-
-At line no: 16 	type_specifier: INT
-
-int 
-
-At line no: 16 	type_specifier: INT
-
-int 
-
-At line no: 16 	parameter_list: type_specifier
-
-int 
-
-At line no: 16 	type_specifier: FLOAT
-
-float 
-
-At line no: 16 	parameter_list: parameter_list COMMA type_specifier
-
-int , float 
-
-At line no: 16 	type_specifier: INT
-
-int 
-
-At line no: 16 	parameter_list: parameter_list COMMA type_specifier
-
-int , float , int 
-
-At line no: 16 	func_declaration: type_specifier ID LPAREN parameter_list RPAREN SEMICOLON
-
-int func ( int , float , int ) ; 
-
-
-At line no: 16 	unit: func_declaration
-
-int func ( int , float , int ) ; 
-
-
-At line no: 16 	program: program unit
-
-void foo ( ) { 
-  return bar ; 
-} 
-int bar ( int x ) { 
-  if ( x < 0 ) return - x ; 
-  return x ; 
-} 
-int oops ; 
-void oops ( int pos ) { 
-  oops = pos * 9 + 2.5 ; 
-} 
-int func ( int , float , int ) ; 
-
-
-At line no: 18 	type_specifier: INT
-
-int 
-
-At line no: 18 	type_specifier: INT
-
-int 
-
-At line no: 18 	parameter_list: type_specifier ID
-
-int a 
-
-At line no: 18 	type_specifier: INT
-
-int 
-
-At line no: 18 	parameter_list: parameter_list COMMA type_specifier ID
-
-int a , int b 
-
-At line no: 18 	type_specifier: INT
-
-int 
-
-At line no: 18 	parameter_list: parameter_list COMMA type_specifier ID
-
-int a , int b , int c 
-
-compound_statement begins!
-INSERT IDENTIFIER: INT a
-INSERT IDENTIFIER: INT b
-INSERT IDENTIFIER: INT c
-At line no: 19 	variable: ID
-
-a 
-
-At line no: 19 	factor: variable
-
-a 
-
-At line no: 19 	unary_expression: factor
-
-a 
-
-At line no: 19 	term: unary_expression
-
-a 
-
-At line no: 19 	simple_expression: term
-
-a 
-
-At line no: 19 	variable: ID
-
-b 
-
-At line no: 19 	factor: variable
-
-b 
-
-At line no: 19 	unary_expression: factor
-
-b 
-
-At line no: 19 	term: unary_expression
-
-b 
-
-At line no: 19 	simple_expression: term
-
-b 
-
-At line no: 19 	rel_expression: simple_expression
-
-b 
-
-At line no: 19 	logic_expression: rel_expression
-
-b 
-
-At line no: 19 	arguments: arguments COMMA logic_expression
-
-b 
-
-At line no: 19 	argument_list: arguments
-
-b 
-
-At line no: 19 	factor: ID LPAREN argument_list RPAREN
-
-bar ( b ) 
-
-At line no: 19 	unary_expression: factor
-
-bar ( b ) 
-
-At line no: 19 	term: unary_expression
-
-bar ( b ) 
-
-At line no: 19 	simple_expression: simple_expression ADDOP term
-
-a - bar ( b ) 
-
-At line no: 19 	variable: ID
-
-c 
-
-At line no: 19 	factor: variable
-
-c 
-
-At line no: 19 	unary_expression: factor
-
-c 
-
-At line no: 19 	term: unary_expression
-
-c 
-
-At line no: 19 	simple_expression: simple_expression ADDOP term
-
-a - bar ( b ) + c 
-
-At line no: 19 	rel_expression: simple_expression
-
-a - bar ( b ) + c 
-
-At line no: 19 	logic_expression: rel_expression
-
-a - bar ( b ) + c 
-
-At line no: 19 	expression: logic_expression
-
-a - bar ( b ) + c 
-
-At line no: 19 	statement: RETURN expression SEMICOLON
-
-return a - bar ( b ) + c ; 
-
-
-At line no: 19 	statements: statement
-
-return a - bar ( b ) + c ; 
-
-
-At line no: 20 	compound_statement: LCURL statements RCURL
-
-{ 
-  return a - bar ( b ) + c ; 
-} 
-
-
-At line no: 20 	func_definition: type_specifier ID LPAREN parameter_list RPAREN compound_statement
-
-int func ( int a , int b , int c ) { 
-  return a - bar ( b ) + c ; 
-} 
-
-
-At line no: 20 	unit: func_definition
-
-int func ( int a , int b , int c ) { 
-  return a - bar ( b ) + c ; 
-} 
-
-
-At line no: 20 	program: program unit
-
-void foo ( ) { 
-  return bar ; 
-} 
-int bar ( int x ) { 
-  if ( x < 0 ) return - x ; 
-  return x ; 
-} 
-int oops ; 
-void oops ( int pos ) { 
-  oops = pos * 9 + 2.5 ; 
-} 
-int func ( int , float , int ) ; 
-int func ( int a , int b , int c ) { 
-  return a - bar ( b ) + c ; 
-} 
-
-
-At line no: 22 	type_specifier: VOID
-
-void 
-
-At line no: 22 	type_specifier: INT
-
-int 
-
-At line no: 22 	parameter_list: type_specifier ID
-
-int a 
-
-At line no: 22 	type_specifier: FLOAT
-
-float 
-
-At line no: 22 	parameter_list: parameter_list COMMA type_specifier ID
-
-int a , float b 
-
-At line no: 22 	type_specifier: INT
-
-int 
-
-At line no: 22 	parameter_list: parameter_list COMMA type_specifier ID
-
-int a , float b , int c 
-
-compound_statement begins!
-INSERT IDENTIFIER: INT a
-INSERT IDENTIFIER: FLOAT b
-INSERT IDENTIFIER: INT c
-At line no: 23 	variable: ID
-
-a 
-
-At line no: 23 	factor: variable
-
-a 
-
-At line no: 23 	unary_expression: factor
-
-a 
-
-At line no: 23 	term: unary_expression
-
-a 
-
-At line no: 23 	simple_expression: term
-
-a 
-
-At line no: 23 	variable: ID
-
-b 
-
-At line no: 23 	factor: variable
-
-b 
-
-At line no: 23 	unary_expression: factor
-
-b 
-
-At line no: 23 	term: unary_expression
-
-b 
-
-At line no: 23 	simple_expression: term
-
-b 
-
-At line no: 23 	rel_expression: simple_expression
-
-b 
-
-At line no: 23 	logic_expression: rel_expression
-
-b 
-
-At line no: 23 	arguments: arguments COMMA logic_expression
-
-b 
-
-At line no: 23 	argument_list: arguments
-
-b 
-
-At line no: 23 	factor: ID LPAREN argument_list RPAREN
-
-bar ( b ) 
-
-At line no: 23 	unary_expression: factor
-
-bar ( b ) 
-
-At line no: 23 	term: unary_expression
-
-bar ( b ) 
-
-At line no: 23 	simple_expression: simple_expression ADDOP term
-
-a - bar ( b ) 
-
-At line no: 23 	variable: ID
-
-c 
-
-At line no: 23 	factor: variable
-
-c 
-
-At line no: 23 	unary_expression: factor
-
-c 
-
-At line no: 23 	term: unary_expression
-
-c 
-
-At line no: 23 	simple_expression: simple_expression ADDOP term
-
-a - bar ( b ) + c 
-
-At line no: 23 	rel_expression: simple_expression
-
-a - bar ( b ) + c 
-
-At line no: 23 	logic_expression: rel_expression
-
-a - bar ( b ) + c 
-
-At line no: 23 	expression: logic_expression
-
-a - bar ( b ) + c 
-
-At line no: 23 	statement: RETURN expression SEMICOLON
-
-return a - bar ( b ) + c ; 
-
-
-At line no: 23 	statements: statement
-
-return a - bar ( b ) + c ; 
-
-
-At line no: 24 	compound_statement: LCURL statements RCURL
-
-{ 
-  return a - bar ( b ) + c ; 
-} 
-
-
-At line no: 24 	func_definition: type_specifier ID LPAREN parameter_list RPAREN compound_statement
-
-void func ( int a , float b , int c ) { 
-  return a - bar ( b ) + c ; 
-} 
-
-
-At line no: 24 	unit: func_definition
-
-void func ( int a , float b , int c ) { 
-  return a - bar ( b ) + c ; 
-} 
-
-
-At line no: 24 	program: program unit
-
-void foo ( ) { 
-  return bar ; 
-} 
-int bar ( int x ) { 
-  if ( x < 0 ) return - x ; 
-  return x ; 
-} 
-int oops ; 
-void oops ( int pos ) { 
-  oops = pos * 9 + 2.5 ; 
-} 
-int func ( int , float , int ) ; 
-int func ( int a , int b , int c ) { 
-  return a - bar ( b ) + c ; 
-} 
-void func ( int a , float b , int c ) { 
-  return a - bar ( b ) + c ; 
-} 
-
-
-At line no: 26 	type_specifier: INT
-
-int 
-
-At line no: 26 	type_specifier: VOID
-
-void 
-
-At line no: 26 	parameter_list: type_specifier
-
-void 
-
-compound_statement begins!
-At line no: 27 	type_specifier: INT
-
-int 
-
-At line no: 27 	declaration_list: ID
-
-x 
-
-At line no: 27 	declaration_list: declaration_list COMMA ID
-
-x , y 
-
-At line no: 27 	var_declaration: type_specifier declaration_list SEMICOLON
-
-int x , y ; 
-
-
-At line no: 27 	statement: var_declaration
-
-int x , y ; 
-
-
-At line no: 27 	statements: statement
-
-int x , y ; 
-
-
-At line no: 28 	type_specifier: FLOAT
-
-float 
-
-At line no: 28 	declaration_list: ID
-
-z 
-
-At line no: 28 	var_declaration: type_specifier declaration_list SEMICOLON
-
-float z ; 
-
-
-At line no: 28 	statement: var_declaration
-
-float z ; 
-
-
-At line no: 28 	statements: statements statement
-
-int x , y ; 
-float z ; 
-
-
-At line no: 30 	variable: ID
-
-x 
-
-At line no: 30 	factor: CONST_INT
-
-2 
-
-At line no: 30 	unary_expression: factor
-
-2 
-
-At line no: 30 	term: unary_expression
-
-2 
-
-At line no: 30 	simple_expression: term
-
-2 
-
-At line no: 30 	rel_expression: simple_expression
-
-2 
-
-At line no: 30 	logic_expression: rel_expression
-
-2 
-
-At line no: 30 	expression: variable ASSIGNOP logic_expression
-
-x = 2 
-
-At line no: 30 	expression_statement: expression SEMICOLON
-
-x = 2 ; 
-
-
-At line no: 30 	statement: expression_statement
-
-x = 2 ; 
-
-
-At line no: 30 	statements: statements statement
-
-int x , y ; 
-float z ; 
-x = 2 ; 
-
-
-At line no: 31 	variable: ID
-
-y 
-
-At line no: 31 	variable: ID
-
-x 
-
-At line no: 31 	factor: variable
-
-x 
-
-At line no: 31 	unary_expression: factor
-
-x 
-
-At line no: 31 	term: unary_expression
-
-x 
-
-At line no: 31 	factor: CONST_INT
-
-45 
-
-At line no: 31 	unary_expression: factor
-
-45 
-
-At line no: 31 	term: term MULOP unary_expression
-
-x * 45 
-
-At line no: 31 	simple_expression: term
-
-x * 45 
-
-At line no: 31 	rel_expression: simple_expression
-
-x * 45 
-
-At line no: 31 	logic_expression: rel_expression
-
-x * 45 
-
-At line no: 31 	expression: variable ASSIGNOP logic_expression
-
-y = x * 45 
-
-At line no: 31 	expression_statement: expression SEMICOLON
-
-y = x * 45 ; 
-
-
-At line no: 31 	statement: expression_statement
-
-y = x * 45 ; 
-
-
-At line no: 31 	statements: statements statement
-
-int x , y ; 
-float z ; 
-x = 2 ; 
-y = x * 45 ; 
-
-
-At line no: 32 	variable: ID
-
-z 
-
-At line no: 32 	variable: ID
-
-x 
-
-At line no: 32 	factor: variable
-
-x 
-
-At line no: 32 	unary_expression: factor
-
-x 
-
-At line no: 32 	term: unary_expression
-
-x 
-
-At line no: 32 	variable: ID
-
-y 
-
-At line no: 32 	factor: variable
-
-y 
-
-At line no: 32 	unary_expression: factor
-
-y 
-
-At line no: 32 	term: term MULOP unary_expression
-
-x * y 
-
-At line no: 32 	factor: CONST_FLOAT
-
-1.0 
-
-At line no: 32 	unary_expression: factor
-
-1.0 
-
-At line no: 32 	term: term MULOP unary_expression
-
-x * y / 1.0 
-
-At line no: 32 	factor: CONST_FLOAT
-
-0.5 
-
-At line no: 32 	unary_expression: factor
-
-0.5 
-
-At line no: 32 	term: term MULOP unary_expression
-
-x * y / 1.0 * 0.5 
-
-At line no: 32 	simple_expression: term
-
-x * y / 1.0 * 0.5 
-
-At line no: 32 	rel_expression: simple_expression
-
-x * y / 1.0 * 0.5 
-
-At line no: 32 	logic_expression: rel_expression
-
-x * y / 1.0 * 0.5 
-
-At line no: 32 	expression: variable ASSIGNOP logic_expression
-
-z = x * y / 1.0 * 0.5 
-
-At line no: 32 	expression_statement: expression SEMICOLON
-
-z = x * y / 1.0 * 0.5 ; 
-
-
-At line no: 32 	statement: expression_statement
-
-z = x * y / 1.0 * 0.5 ; 
-
-
-At line no: 32 	statements: statements statement
-
-int x , y ; 
-float z ; 
-x = 2 ; 
-y = x * 45 ; 
-z = x * y / 1.0 * 0.5 ; 
-
-
-At line no: 34 	type_specifier: INT
-
-int 
-
-At line no: 34 	declaration_list: ID
-
-some_val 
-
-At line no: 34 	var_declaration: type_specifier declaration_list SEMICOLON
-
-int some_val ; 
-
-
-At line no: 34 	statement: var_declaration
-
-int some_val ; 
-
-
-At line no: 34 	statements: statements statement
-
-int x , y ; 
-float z ; 
-x = 2 ; 
-y = x * 45 ; 
-z = x * y / 1.0 * 0.5 ; 
-int some_val ; 
-
-
-At line no: 35 	variable: ID
-
-some_val 
-
-At line no: 35 	variable: ID
-
-x 
-
-At line no: 35 	factor: variable
-
-x 
-
-At line no: 35 	unary_expression: factor
-
-x 
-
-At line no: 35 	term: unary_expression
-
-x 
-
-At line no: 35 	simple_expression: term
-
-x 
-
-At line no: 35 	rel_expression: simple_expression
-
-x 
-
-At line no: 35 	logic_expression: rel_expression
-
-x 
-
-At line no: 35 	arguments: arguments COMMA logic_expression
-
-x 
-
-At line no: 35 	variable: ID
-
-z 
-
-At line no: 35 	factor: variable
-
-z 
-
-At line no: 35 	unary_expression: factor
-
-z 
-
-At line no: 35 	term: unary_expression
-
-z 
-
-At line no: 35 	simple_expression: term
-
-z 
-
-At line no: 35 	rel_expression: simple_expression
-
-z 
-
-At line no: 35 	logic_expression: rel_expression
-
-z 
-
-At line no: 35 	arguments: arguments COMMA logic_expression
-
-x , z 
-
-At line no: 35 	variable: ID
-
-y 
-
-At line no: 35 	factor: variable
-
-y 
-
-At line no: 35 	unary_expression: factor
-
-y 
-
-At line no: 35 	term: unary_expression
-
-y 
-
-At line no: 35 	simple_expression: term
-
-y 
-
-At line no: 35 	rel_expression: simple_expression
-
-y 
-
-At line no: 35 	logic_expression: rel_expression
-
-y 
-
-At line no: 35 	arguments: arguments COMMA logic_expression
-
-x , z , y 
-
-At line no: 35 	argument_list: arguments
-
-x , z , y 
-
-At line no: 35 	factor: ID LPAREN argument_list RPAREN
-
-func ( x , z , y ) 
-
-At line no: 35 	unary_expression: factor
-
-func ( x , z , y ) 
-
-At line no: 35 	term: unary_expression
-
-func ( x , z , y ) 
-
-At line no: 35 	simple_expression: term
-
-func ( x , z , y ) 
-
-At line no: 35 	rel_expression: simple_expression
-
-func ( x , z , y ) 
-
-At line no: 35 	logic_expression: rel_expression
-
-func ( x , z , y ) 
-
-At line no: 35 	expression: variable ASSIGNOP logic_expression
-
-some_val = func ( x , z , y ) 
-
-At line no: 35 	expression_statement: expression SEMICOLON
-
-some_val = func ( x , z , y ) ; 
-
-
-At line no: 35 	statement: expression_statement
-
-some_val = func ( x , z , y ) ; 
-
-
-At line no: 35 	statements: statements statement
-
-int x , y ; 
-float z ; 
-x = 2 ; 
-y = x * 45 ; 
-z = x * y / 1.0 * 0.5 ; 
-int some_val ; 
-some_val = func ( x , z , y ) ; 
-
-
-At line no: 37 	type_specifier: INT
-
-int 
-
-At line no: 37 	declaration_list: ID
-
-i 
-
-At line no: 37 	declaration_list: declaration_list COMMA ID
-
-i , odd 
-
-At line no: 37 	declaration_list: declaration_list COMMA ID
-
-i , odd , even 
-
-At line no: 37 	var_declaration: type_specifier declaration_list SEMICOLON
-
-int i , odd , even ; 
-
-
-At line no: 37 	statement: var_declaration
-
-int i , odd , even ; 
-
-
-At line no: 37 	statements: statements statement
-
-int x , y ; 
-float z ; 
-x = 2 ; 
-y = x * 45 ; 
-z = x * y / 1.0 * 0.5 ; 
-int some_val ; 
-some_val = func ( x , z , y ) ; 
-int i , odd , even ; 
-
-
-At line no: 38 	variable: ID
-
-odd 
-
-At line no: 38 	factor: CONST_INT
-
-0 
-
-At line no: 38 	unary_expression: factor
-
-0 
-
-At line no: 38 	term: unary_expression
-
-0 
-
-At line no: 38 	simple_expression: term
-
-0 
-
-At line no: 38 	rel_expression: simple_expression
-
-0 
-
-At line no: 38 	logic_expression: rel_expression
-
-0 
-
-At line no: 38 	expression: variable ASSIGNOP logic_expression
-
-odd = 0 
-
-At line no: 38 	expression_statement: expression SEMICOLON
-
-odd = 0 ; 
-
-
-At line no: 38 	statement: expression_statement
-
-odd = 0 ; 
-
-
-At line no: 38 	statements: statements statement
-
-int x , y ; 
-float z ; 
-x = 2 ; 
-y = x * 45 ; 
-z = x * y / 1.0 * 0.5 ; 
-int some_val ; 
-some_val = func ( x , z , y ) ; 
-int i , odd , even ; 
-odd = 0 ; 
-
-
-At line no: 39 	variable: ID
-
-even 
-
-At line no: 39 	factor: CONST_INT
-
-0 
-
-At line no: 39 	unary_expression: factor
-
-0 
-
-At line no: 39 	term: unary_expression
-
-0 
-
-At line no: 39 	simple_expression: term
-
-0 
-
-At line no: 39 	rel_expression: simple_expression
-
-0 
-
-At line no: 39 	logic_expression: rel_expression
-
-0 
-
-At line no: 39 	expression: variable ASSIGNOP logic_expression
-
-even = 0 
-
-At line no: 39 	expression_statement: expression SEMICOLON
-
-even = 0 ; 
-
-
-At line no: 39 	statement: expression_statement
-
-even = 0 ; 
-
-
-At line no: 39 	statements: statements statement
-
-int x , y ; 
-float z ; 
-x = 2 ; 
-y = x * 45 ; 
-z = x * y / 1.0 * 0.5 ; 
-int some_val ; 
-some_val = func ( x , z , y ) ; 
-int i , odd , even ; 
-odd = 0 ; 
-even = 0 ; 
-
-
-At line no: 40 	variable: ID
-
-i 
-
-At line no: 40 	factor: CONST_INT
-
-0 
-
-At line no: 40 	unary_expression: factor
-
-0 
-
-At line no: 40 	term: unary_expression
-
-0 
-
-At line no: 40 	simple_expression: term
-
-0 
-
-At line no: 40 	rel_expression: simple_expression
-
-0 
-
-At line no: 40 	logic_expression: rel_expression
-
-0 
-
-At line no: 40 	expression: variable ASSIGNOP logic_expression
-
-i = 0 
-
-At line no: 40 	expression_statement: expression SEMICOLON
-
-i = 0 ; 
-
-
-At line no: 40 	variable: ID
-
-i 
-
-At line no: 40 	factor: variable
-
-i 
-
-At line no: 40 	unary_expression: factor
-
-i 
-
-At line no: 40 	term: unary_expression
-
-i 
-
-At line no: 40 	simple_expression: term
-
-i 
-
-At line no: 40 	factor: CONST_INT
-
-10 
-
-At line no: 40 	unary_expression: factor
-
-10 
-
-At line no: 40 	term: unary_expression
-
-10 
-
-At line no: 40 	simple_expression: term
-
-10 
-
-At line no: 40 	rel_expression: simple_expression
-
-i < 10 
-
-At line no: 40 	logic_expression: rel_expression
-
-i < 10 
-
-At line no: 40 	expression: logic_expression
-
-i < 10 
-
-At line no: 40 	expression_statement: expression SEMICOLON
-
-i < 10 ; 
-
-
-At line no: 40 	variable: ID
-
-i 
-
-At line no: 40 	factor: variable INCOP
-
-i ++ 
-
-At line no: 40 	unary_expression: factor
-
-i ++ 
-
-At line no: 40 	term: unary_expression
-
-i ++ 
-
-At line no: 40 	simple_expression: term
-
-i ++ 
-
-At line no: 40 	rel_expression: simple_expression
-
-i ++ 
-
-At line no: 40 	logic_expression: rel_expression
-
-i ++ 
-
-At line no: 40 	expression: logic_expression
-
-i ++ 
-
-compound_statement begins!
-At line no: 41 	variable: ID
-
-i 
-
-At line no: 41 	factor: variable
-
-i 
-
-At line no: 41 	unary_expression: factor
-
-i 
-
-At line no: 41 	term: unary_expression
-
-i 
-
-At line no: 41 	factor: CONST_INT
-
-2 
-
-At line no: 41 	unary_expression: factor
-
-2 
-
-At line no: 41 	term: term MULOP unary_expression
-
-i % 2 
-
-At line no: 41 	simple_expression: term
-
-i % 2 
-
-At line no: 41 	factor: CONST_INT
-
-0 
-
-At line no: 41 	unary_expression: factor
-
-0 
-
-At line no: 41 	term: unary_expression
-
-0 
-
-At line no: 41 	simple_expression: term
-
-0 
-
-At line no: 41 	rel_expression: simple_expression
-
-i % 2 == 0 
-
-At line no: 41 	logic_expression: rel_expression
-
-i % 2 == 0 
-
-At line no: 41 	expression: logic_expression
-
-i % 2 == 0 
-
-At line no: 41 	variable: ID
-
-even 
-
-At line no: 41 	factor: variable INCOP
-
-even ++ 
-
-At line no: 41 	unary_expression: factor
-
-even ++ 
-
-At line no: 41 	term: unary_expression
-
-even ++ 
-
-At line no: 41 	simple_expression: term
-
-even ++ 
-
-At line no: 41 	rel_expression: simple_expression
-
-even ++ 
-
-At line no: 41 	logic_expression: rel_expression
-
-even ++ 
-
-At line no: 41 	expression: logic_expression
-
-even ++ 
-
-At line no: 41 	expression_statement: expression SEMICOLON
-
-even ++ ; 
-
-
-At line no: 41 	statement: expression_statement
-
-even ++ ; 
-
-
-At line no: 42 	variable: ID
-
-odd 
-
-At line no: 42 	factor: variable INCOP
-
-odd ++ 
-
-At line no: 42 	unary_expression: factor
-
-odd ++ 
-
-At line no: 42 	term: unary_expression
-
-odd ++ 
-
-At line no: 42 	simple_expression: term
-
-odd ++ 
-
-At line no: 42 	rel_expression: simple_expression
-
-odd ++ 
-
-At line no: 42 	logic_expression: rel_expression
-
-odd ++ 
-
-At line no: 42 	expression: logic_expression
-
-odd ++ 
-
-At line no: 42 	expression_statement: expression SEMICOLON
-
-odd ++ ; 
-
-
-At line no: 42 	statement: expression_statement
-
-odd ++ ; 
-
-
-At line no: 42 	statement: IF LPAREN expression RPAREN statement ELSE statement
-
-if ( i % 2 == 0 ) even ++ ; 
-else odd ++ ; 
-
-
-At line no: 42 	statements: statement
-
-if ( i % 2 == 0 ) even ++ ; 
-else odd ++ ; 
-
-
-At line no: 43 	compound_statement: LCURL statements RCURL
-
-{ 
-  if ( i % 2 == 0 ) even ++ ; 
-  else odd ++ ; 
-} 
-
-
-At line no: 43 	statement: compound_statement
-
-{ 
-  if ( i % 2 == 0 ) even ++ ; 
-  else odd ++ ; 
-} 
-
-
-At line no: 43 	statement: FOR LPAREN expression_statement expression_statement expression RPAREN statement
-
-for ( i = 0 ; 
-i < 10 ; 
-i ++ ) { 
-  if ( i % 2 == 0 ) even ++ ; 
-  else odd ++ ; 
-} 
-
-
-At line no: 43 	statements: statements statement
-
-int x , y ; 
-float z ; 
-x = 2 ; 
-y = x * 45 ; 
-z = x * y / 1.0 * 0.5 ; 
-int some_val ; 
-some_val = func ( x , z , y ) ; 
-int i , odd , even ; 
-odd = 0 ; 
-even = 0 ; 
-for ( i = 0 ; 
-i < 10 ; 
-i ++ ) { 
-  if ( i % 2 == 0 ) even ++ ; 
-  else odd ++ ; 
-} 
-
-
-At line no: 45 	variable: ID
-
-i 
-
-At line no: 45 	factor: variable
-
-i 
-
-At line no: 45 	unary_expression: factor
-
-i 
-
-At line no: 45 	term: unary_expression
-
-i 
-
-At line no: 45 	simple_expression: term
-
-i 
-
-At line no: 45 	factor: CONST_INT
-
-0 
-
-At line no: 45 	unary_expression: factor
-
-0 
-
-At line no: 45 	term: unary_expression
-
-0 
-
-At line no: 45 	simple_expression: term
-
-0 
-
-At line no: 45 	rel_expression: simple_expression
-
-i > 0 
-
-At line no: 45 	logic_expression: rel_expression
-
-i > 0 
-
-At line no: 45 	expression: logic_expression
-
-i > 0 
-
-compound_statement begins!
-At line no: 46 	variable: ID
-
-odd 
-
-At line no: 46 	factor: variable
-
-odd 
-
-At line no: 46 	unary_expression: factor
-
-odd 
-
-At line no: 46 	term: unary_expression
-
-odd 
-
-At line no: 46 	simple_expression: term
-
-odd 
-
-At line no: 46 	variable: ID
-
-even 
-
-At line no: 46 	factor: variable
-
-even 
-
-At line no: 46 	unary_expression: factor
-
-even 
-
-At line no: 46 	term: unary_expression
-
-even 
-
-At line no: 46 	simple_expression: term
-
-even 
-
-At line no: 46 	rel_expression: simple_expression
-
-odd > even 
-
-At line no: 46 	logic_expression: rel_expression
-
-odd > even 
-
-At line no: 46 	expression: logic_expression
-
-odd > even 
-
-At line no: 47 	variable: ID
-
-even 
-
-At line no: 47 	factor: variable
-
-even 
-
-At line no: 47 	unary_expression: factor
-
-even 
-
-At line no: 47 	term: unary_expression
-
-even 
-
-At line no: 47 	simple_expression: term
-
-even 
-
-At line no: 47 	variable: ID
-
-i 
-
-At line no: 47 	factor: variable
-
-i 
-
-At line no: 47 	unary_expression: factor
-
-i 
-
-At line no: 47 	term: unary_expression
-
-i 
-
-At line no: 47 	simple_expression: term
-
-i 
-
-At line no: 47 	rel_expression: simple_expression
-
-even == i 
-
-At line no: 47 	logic_expression: rel_expression
-
-even == i 
-
-At line no: 47 	expression: logic_expression
-
-even == i 
-
-At line no: 47 	variable: ID
-
-cnt 
-
-At line no: 47 	factor: variable INCOP
-
-cnt -- 
-
-At line no: 47 	unary_expression: factor
-
-cnt -- 
-
-At line no: 47 	term: unary_expression
-
-cnt -- 
-
-At line no: 47 	simple_expression: term
-
-cnt -- 
-
-At line no: 47 	rel_expression: simple_expression
-
-cnt -- 
-
-At line no: 47 	logic_expression: rel_expression
-
-cnt -- 
-
-At line no: 47 	expression: logic_expression
-
-cnt -- 
-
-At line no: 47 	expression_statement: expression SEMICOLON
-
-cnt -- ; 
-
-
-At line no: 47 	statement: expression_statement
-
-cnt -- ; 
-
-
-At line no: 48 	variable: ID
-
-cnt 
-
-At line no: 48 	factor: variable INCOP
-
-cnt ++ 
-
-At line no: 48 	unary_expression: factor
-
-cnt ++ 
-
-At line no: 48 	term: unary_expression
-
-cnt ++ 
-
-At line no: 48 	simple_expression: term
-
-cnt ++ 
-
-At line no: 48 	rel_expression: simple_expression
-
-cnt ++ 
-
-At line no: 48 	logic_expression: rel_expression
-
-cnt ++ 
-
-At line no: 48 	expression: logic_expression
-
-cnt ++ 
-
-At line no: 48 	expression_statement: expression SEMICOLON
-
-cnt ++ ; 
-
-
-At line no: 48 	statement: expression_statement
-
-cnt ++ ; 
-
-
-At line no: 48 	statement: IF LPAREN expression RPAREN statement ELSE statement
-
-if ( even == i ) cnt -- ; 
-else cnt ++ ; 
-
-
-At line no: 50 	variable: ID
-
-odd 
-
-At line no: 50 	factor: variable
-
-odd 
-
-At line no: 50 	unary_expression: factor
-
-odd 
-
-At line no: 50 	term: unary_expression
-
-odd 
-
-At line no: 50 	simple_expression: term
-
-odd 
-
-At line no: 50 	variable: ID
-
-i 
-
-At line no: 50 	factor: variable
-
-i 
-
-At line no: 50 	unary_expression: factor
-
-i 
-
-At line no: 50 	term: unary_expression
-
-i 
-
-At line no: 50 	simple_expression: term
-
-i 
-
-At line no: 50 	rel_expression: simple_expression
-
-odd == i 
-
-At line no: 50 	logic_expression: rel_expression
-
-odd == i 
-
-At line no: 50 	expression: logic_expression
-
-odd == i 
-
-At line no: 50 	variable: ID
-
-cnt 
-
-At line no: 50 	factor: variable INCOP
-
-cnt ++ 
-
-At line no: 50 	unary_expression: factor
-
-cnt ++ 
-
-At line no: 50 	term: unary_expression
-
-cnt ++ 
-
-At line no: 50 	simple_expression: term
-
-cnt ++ 
-
-At line no: 50 	rel_expression: simple_expression
-
-cnt ++ 
-
-At line no: 50 	logic_expression: rel_expression
-
-cnt ++ 
-
-At line no: 50 	expression: logic_expression
-
-cnt ++ 
-
-At line no: 50 	expression_statement: expression SEMICOLON
-
-cnt ++ ; 
-
-
-At line no: 50 	statement: expression_statement
-
-cnt ++ ; 
-
-
-At line no: 51 	variable: ID
-
-cnt 
-
-At line no: 51 	factor: variable INCOP
-
-cnt -- 
-
-At line no: 51 	unary_expression: factor
-
-cnt -- 
-
-At line no: 51 	term: unary_expression
-
-cnt -- 
-
-At line no: 51 	simple_expression: term
-
-cnt -- 
-
-At line no: 51 	rel_expression: simple_expression
-
-cnt -- 
-
-At line no: 51 	logic_expression: rel_expression
-
-cnt -- 
-
-At line no: 51 	expression: logic_expression
-
-cnt -- 
-
-At line no: 51 	expression_statement: expression SEMICOLON
-
-cnt -- ; 
-
-
-At line no: 51 	statement: expression_statement
-
-cnt -- ; 
-
-
-At line no: 51 	statement: IF LPAREN expression RPAREN statement ELSE statement
-
-if ( odd == i ) cnt ++ ; 
-else cnt -- ; 
-
-
-At line no: 51 	statement: IF LPAREN expression RPAREN statement ELSE statement
-
-if ( odd > even ) if ( even == i ) cnt -- ; 
-else cnt ++ ; 
-else if ( odd == i ) cnt ++ ; 
-else cnt -- ; 
-
-
-At line no: 51 	statements: statement
-
-if ( odd > even ) if ( even == i ) cnt -- ; 
-else cnt ++ ; 
-else if ( odd == i ) cnt ++ ; 
-else cnt -- ; 
-
-
-At line no: 52 	variable: ID
-
-i 
-
-At line no: 52 	factor: variable INCOP
-
-i -- 
-
-At line no: 52 	unary_expression: factor
-
-i -- 
-
-At line no: 52 	term: unary_expression
-
-i -- 
-
-At line no: 52 	simple_expression: term
-
-i -- 
-
-At line no: 52 	rel_expression: simple_expression
-
-i -- 
-
-At line no: 52 	logic_expression: rel_expression
-
-i -- 
-
-At line no: 52 	expression: logic_expression
-
-i -- 
-
-At line no: 52 	expression_statement: expression SEMICOLON
-
-i -- ; 
-
-
-At line no: 52 	statement: expression_statement
-
-i -- ; 
-
-
-At line no: 52 	statements: statements statement
-
-if ( odd > even ) if ( even == i ) cnt -- ; 
-else cnt ++ ; 
-else if ( odd == i ) cnt ++ ; 
-else cnt -- ; 
-i -- ; 
-
-
-At line no: 53 	compound_statement: LCURL statements RCURL
-
-{ 
-  if ( odd > even ) if ( even == i ) cnt -- ; 
-  else cnt ++ ; 
-  else if ( odd == i ) cnt ++ ; 
-  else cnt -- ; 
-  i -- ; 
-} 
-
-
-At line no: 53 	statement: compound_statement
-
-{ 
-  if ( odd > even ) if ( even == i ) cnt -- ; 
-  else cnt ++ ; 
-  else if ( odd == i ) cnt ++ ; 
-  else cnt -- ; 
-  i -- ; 
-} 
-
-
-At line no: 53 	statement: WHILE LPAREN expression RPAREN statement
-
-while ( i > 0 ) { 
-  if ( odd > even ) if ( even == i ) cnt -- ; 
-  else cnt ++ ; 
-  else if ( odd == i ) cnt ++ ; 
-  else cnt -- ; 
-  i -- ; 
-} 
-
-
-At line no: 53 	statements: statements statement
-
-int x , y ; 
-float z ; 
-x = 2 ; 
-y = x * 45 ; 
-z = x * y / 1.0 * 0.5 ; 
-int some_val ; 
-some_val = func ( x , z , y ) ; 
-int i , odd , even ; 
-odd = 0 ; 
-even = 0 ; 
-for ( i = 0 ; 
-i < 10 ; 
-i ++ ) { 
-  if ( i % 2 == 0 ) even ++ ; 
-  else odd ++ ; 
-} 
-while ( i > 0 ) { 
-  if ( odd > even ) if ( even == i ) cnt -- ; 
-  else cnt ++ ; 
-  else if ( odd == i ) cnt ++ ; 
-  else cnt -- ; 
-  i -- ; 
-} 
-
-
-At line no: 55 	factor: CONST_INT
-
-0 
-
-At line no: 55 	unary_expression: factor
-
-0 
-
-At line no: 55 	term: unary_expression
-
-0 
-
-At line no: 55 	simple_expression: term
-
-0 
-
-At line no: 55 	rel_expression: simple_expression
-
-0 
-
-At line no: 55 	logic_expression: rel_expression
-
-0 
-
-At line no: 55 	expression: logic_expression
-
-0 
-
-At line no: 55 	statement: RETURN expression SEMICOLON
-
-return 0 ; 
-
-
-At line no: 55 	statements: statements statement
-
-int x , y ; 
-float z ; 
-x = 2 ; 
-y = x * 45 ; 
-z = x * y / 1.0 * 0.5 ; 
-int some_val ; 
-some_val = func ( x , z , y ) ; 
-int i , odd , even ; 
-odd = 0 ; 
-even = 0 ; 
-for ( i = 0 ; 
-i < 10 ; 
-i ++ ) { 
-  if ( i % 2 == 0 ) even ++ ; 
-  else odd ++ ; 
-} 
-while ( i > 0 ) { 
-  if ( odd > even ) if ( even == i ) cnt -- ; 
-  else cnt ++ ; 
-  else if ( odd == i ) cnt ++ ; 
-  else cnt -- ; 
-  i -- ; 
-} 
-return 0 ; 
-
-
-At line no: 56 	compound_statement: LCURL statements RCURL
-
-{ 
-  int x , y ; 
-  float z ; 
-  x = 2 ; 
-  y = x * 45 ; 
-  z = x * y / 1.0 * 0.5 ; 
-  int some_val ; 
-  some_val = func ( x , z , y ) ; 
-  int i , odd , even ; 
-  odd = 0 ; 
-  even = 0 ; 
-  for ( i = 0 ; 
-  i < 10 ; 
-  i ++ ) { 
-    if ( i % 2 == 0 ) even ++ ; 
-    else odd ++ ; 
-  } 
-  while ( i > 0 ) { 
-    if ( odd > even ) if ( even == i ) cnt -- ; 
-    else cnt ++ ; 
-    else if ( odd == i ) cnt ++ ; 
-    else cnt -- ; 
-    i -- ; 
-  } 
+int main ( ) { 
+  int a [ 2 ] , c , i , j ; 
+  float c ; 
+  a [ 2.5 ] = 1 ; 
+  i = 2.3 ; 
+  j = 2 % 3.7 ; 
+  a = 4 ; 
+  func ( a ) ; 
+  b = 8 ; 
   return 0 ; 
 } 
 
 
-At line no: 56 	func_definition: type_specifier ID LPAREN parameter_list RPAREN compound_statement
+At line no: 15 	start: program
 
-int main ( void ) { 
-  int x , y ; 
-  float z ; 
-  x = 2 ; 
-  y = x * 45 ; 
-  z = x * y / 1.0 * 0.5 ; 
-  int some_val ; 
-  some_val = func ( x , z , y ) ; 
-  int i , odd , even ; 
-  odd = 0 ; 
-  even = 0 ; 
-  for ( i = 0 ; 
-  i < 10 ; 
-  i ++ ) { 
-    if ( i % 2 == 0 ) even ++ ; 
-    else odd ++ ; 
-  } 
-  while ( i > 0 ) { 
-    if ( odd > even ) if ( even == i ) cnt -- ; 
-    else cnt ++ ; 
-    else if ( odd == i ) cnt ++ ; 
-    else cnt -- ; 
-    i -- ; 
-  } 
-  return 0 ; 
+int func ( int a ) { 
+  return a ; 
 } 
-
-
-At line no: 56 	unit: func_definition
-
-int main ( void ) { 
-  int x , y ; 
-  float z ; 
-  x = 2 ; 
-  y = x * 45 ; 
-  z = x * y / 1.0 * 0.5 ; 
-  int some_val ; 
-  some_val = func ( x , z , y ) ; 
-  int i , odd , even ; 
-  odd = 0 ; 
-  even = 0 ; 
-  for ( i = 0 ; 
-  i < 10 ; 
-  i ++ ) { 
-    if ( i % 2 == 0 ) even ++ ; 
-    else odd ++ ; 
-  } 
-  while ( i > 0 ) { 
-    if ( odd > even ) if ( even == i ) cnt -- ; 
-    else cnt ++ ; 
-    else if ( odd == i ) cnt ++ ; 
-    else cnt -- ; 
-    i -- ; 
-  } 
-  return 0 ; 
-} 
-
-
-At line no: 56 	program: program unit
-
-void foo ( ) { 
-  return bar ; 
-} 
-int bar ( int x ) { 
-  if ( x < 0 ) return - x ; 
-  return x ; 
-} 
-int oops ; 
-void oops ( int pos ) { 
-  oops = pos * 9 + 2.5 ; 
-} 
-int func ( int , float , int ) ; 
-int func ( int a , int b , int c ) { 
-  return a - bar ( b ) + c ; 
-} 
-void func ( int a , float b , int c ) { 
-  return a - bar ( b ) + c ; 
-} 
-int main ( void ) { 
-  int x , y ; 
-  float z ; 
-  x = 2 ; 
-  y = x * 45 ; 
-  z = x * y / 1.0 * 0.5 ; 
-  int some_val ; 
-  some_val = func ( x , z , y ) ; 
-  int i , odd , even ; 
-  odd = 0 ; 
-  even = 0 ; 
-  for ( i = 0 ; 
-  i < 10 ; 
-  i ++ ) { 
-    if ( i % 2 == 0 ) even ++ ; 
-    else odd ++ ; 
-  } 
-  while ( i > 0 ) { 
-    if ( odd > even ) if ( even == i ) cnt -- ; 
-    else cnt ++ ; 
-    else if ( odd == i ) cnt ++ ; 
-    else cnt -- ; 
-    i -- ; 
-  } 
-  return 0 ; 
-} 
-
-
-At line no: 56 	start: program
-
-void foo ( ) { 
-  return bar ; 
-} 
-int bar ( int x ) { 
-  if ( x < 0 ) return - x ; 
-  return x ; 
-} 
-int oops ; 
-void oops ( int pos ) { 
-  oops = pos * 9 + 2.5 ; 
-} 
-int func ( int , float , int ) ; 
-int func ( int a , int b , int c ) { 
-  return a - bar ( b ) + c ; 
-} 
-void func ( int a , float b , int c ) { 
-  return a - bar ( b ) + c ; 
-} 
-int main ( void ) { 
-  int x , y ; 
-  float z ; 
-  x = 2 ; 
-  y = x * 45 ; 
-  z = x * y / 1.0 * 0.5 ; 
-  int some_val ; 
-  some_val = func ( x , z , y ) ; 
-  int i , odd , even ; 
-  odd = 0 ; 
-  even = 0 ; 
-  for ( i = 0 ; 
-  i < 10 ; 
-  i ++ ) { 
-    if ( i % 2 == 0 ) even ++ ; 
-    else odd ++ ; 
-  } 
-  while ( i > 0 ) { 
-    if ( odd > even ) if ( even == i ) cnt -- ; 
-    else cnt ++ ; 
-    else if ( odd == i ) cnt ++ ; 
-    else cnt -- ; 
-    i -- ; 
-  } 
+int main ( ) { 
+  int a [ 2 ] , c , i , j ; 
+  float c ; 
+  a [ 2.5 ] = 1 ; 
+  i = 2.3 ; 
+  j = 2 % 3.7 ; 
+  a = 4 ; 
+  func ( a ) ; 
+  b = 8 ; 
   return 0 ; 
 } 
 

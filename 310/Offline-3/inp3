@@ -1,3 +1,16 @@
+int foo() {  
+        return 5;
+}
+
+void bar() {
+        return 3;
+}
+
+int fun(int a, int b) {
+        return a + b;
+}
+
 int main() {
-	x = 2;
+        fun(foo(), bar());
+        return 0;
 }

@@ -19,6 +19,7 @@
 	void remove_scope() { symbol_table.exit_scope(); identifer_types.exit_scope(); }
 	
 	ParameterList temp_parameter_list;
+	ParameterList temp_arg_list;
 	pointer_type parameter_identifers = nullptr;
 	string cur_type_specifier = "INT";
 
@@ -111,6 +112,13 @@
 		}
 
 		temp_parameter_list.clear();
+	}
+	
+	string combine_expressions(string _type1, string _type2) {
+		if(_type1.back() == '*' or _type2.back() == '*') return "ERROR";
+		if(_type1 == "ERROR" or _type2 == "ERROR") return "ERROR";
+		if(_type1 == "FLOAT" or _type2 == "FLOAT") return "FLOAT";
+		return "INT";
 	}
 %}
 
@@ -382,7 +390,7 @@ declaration_list:
 	| declaration_list COMMA ID LTHIRD CONST_INT RTHIRD {
 		bool flag = symbol_table.insert(*($3));
 		if(!flag) prnt_err("Multiple declaration of " + $3->get_name());
-		else identifer_types.insert(SymbolInfo($3->get_name(), cur_type_specifier));
+		else identifer_types.insert(SymbolInfo($3->get_name(), cur_type_specifier + "*"));
 
 		append($1, $2);
 		append($2, $3);
@@ -409,7 +417,7 @@ declaration_list:
 	| ID LTHIRD CONST_INT RTHIRD {
 		bool flag = symbol_table.insert(*($1));
 		if(!flag) prnt_err("Multiple declaration of " + $1->get_name());
-		else identifer_types.insert(SymbolInfo($1->get_name(), cur_type_specifier));
+		else identifer_types.insert(SymbolInfo($1->get_name(), cur_type_specifier+"*"));
 
 		append($1, $2);
 		append($2, $3);
@@ -512,7 +520,7 @@ statement:
 	}
 	| PRINTLN LPAREN ID RPAREN SEMICOLON {
 		pointer_type ret = symbol_table.search($3->get_name());
-		if(ret == nullptr) prnt_err("Identifier " + $3->get_name() + " declaration not found");
+		if(ret == nullptr) prnt_err("Identifier " + $3->get_name() + " not declared");
 
 		append($1, $2);
 		append($2, $3);
@@ -556,7 +564,12 @@ expression_statement:
 variable:
 	ID {
 		pointer_type ret = symbol_table.search($1->get_name());
-		if(ret == nullptr) prnt_err("Identifier " + $1->get_name() + " declaration not found");
+		if(ret == nullptr) prnt_err("Identifier " + $1->get_name() + " not declared");
+		else {
+			pointer_type ptr = identifer_types.search($1->get_name());
+			assert(ptr);
+			$1->expression_type = ptr->get_type();
+		}
 
 		append($1, nullptr);
 
@@ -566,9 +579,16 @@ variable:
 	}
 	| ID LTHIRD expression RTHIRD {
 		pointer_type ret = symbol_table.search($1->get_name());
-		if(ret == nullptr) prnt_err("Identifier " + $1->get_name() + " declaration not found");
+		if(ret == nullptr) prnt_err("Identifier " + $1->get_name() + " not declared");
+		else {
+			pointer_type ptr = identifer_types.search($1->get_name());
+			assert(ptr);
+			$1->expression_type = ptr->get_type();
+			$1->expression_type.pop_back();	// for array*
+		}
 
 		// array index here
+		if($3->expression_type != "INT") prnt_err("Non-integer array index");
 
 		append($1, $2);
 		append($2, $3);
@@ -590,6 +610,10 @@ expression:
 		prnt("expression: logic_expression", $$);
 	}
 	| variable ASSIGNOP logic_expression {
+		if($1->expression_type == "VOID" or $3->expression_type == "VOID") 
+			prnt_err("void types found in assignment");
+		else if($1->expression_type != "ERROR" and $3->expression_type != "ERROR" and $1->expression_type != $3->expression_type)
+			prnt_err("Type conversion");
 		// check variable type here
 
 		append($1, $2);
@@ -611,11 +635,15 @@ logic_expression:
 		prnt("logic_expression: rel_expression", $$);
 	}
 	| rel_expression LOGICOP rel_expression {
+		if($1->expression_type == "VOID" or $3->expression_type == "VOID") 
+			prnt_err("void types found in expression");
+		
 		append($1, $2);
 		append($2, $3);
 		append($3, nullptr);
 
 		$$ = $1;
+		$$->expression_type = "INT";
 
 		prnt("logic_expression: rel_expression LOGICOP rel_expression", $$);
 	}
@@ -630,11 +658,15 @@ rel_expression:
 		prnt("rel_expression: simple_expression", $$);
 	}
 	| simple_expression RELOP simple_expression {
+		if($1->expression_type == "VOID" or $3->expression_type == "VOID") 
+			prnt_err("void types found in expression");
+		
 		append($1, $2);
 		append($2, $3);
 		append($3, nullptr);
 
 		$$ = $1;
+		$$->expression_type = "INT";
 
 		prnt("rel_expression: simple_expression", $$);
 	}
@@ -649,11 +681,15 @@ simple_expression:
 		prnt("simple_expression: term", $$);
 	}
 	| simple_expression ADDOP term {
+		if($1->expression_type == "VOID" or $3->expression_type == "VOID") 
+			prnt_err("void types found in expression");
+		
 		append($1, $2);
 		append($2, $3);
 		append($3, nullptr);
 
 		$$ = $1;
+		$$->expression_type = combine_expressions($1->expression_type, $3->expression_type);
 
 		prnt("simple_expression: simple_expression ADDOP term", $$);
 	}
@@ -673,6 +709,14 @@ term:
 		append($3, nullptr);
 
 		$$ = $1;
+		$$->expression_type = combine_expressions($1->expression_type, $3->expression_type);
+
+		if($1->expression_type == "VOID" or $3->expression_type == "VOID") 
+			prnt_err("void types found in expression");
+		else if($2->get_name() == "%" and ($1->expression_type != "INT" or $3->expression_type != "INT")) {
+			prnt_err("Non-integer operand on modulus operator");
+			$$->expression_type = "ERROR";
+		}
 
 		prnt("term: term MULOP unary_expression", $$);
 	}
@@ -684,6 +728,7 @@ unary_expression:
 		append($2, nullptr);
 
 		$$ = $1;
+		$$->expression_type = $2->expression_type;
 
 		prnt("unary_expression: ADDOP unary_expression", $$);
 	}
@@ -692,6 +737,7 @@ unary_expression:
 		append($2, nullptr);
 
 		$$ = $1;
+		$$->expression_type = $2->expression_type;
 
 		prnt("unary_expression: NOT unary_expression", $$);
 	}
@@ -714,7 +760,15 @@ factor:
 	}
 	| ID LPAREN argument_list RPAREN {
 		pointer_type ret = symbol_table.search($1->get_name());
-		if(ret == nullptr) prnt_err("Identifier " + $1->get_name() + " declaration not found");
+		if(ret == nullptr) prnt_err("Identifier " + $1->get_name() + " not declared");
+		else {
+			pointer_type ptr = identifer_types.search($1->get_name());
+			assert(ptr);
+			$1->expression_type = ptr->get_type();
+
+			temp_arg_list = ($3 == nullptr) ? ParameterList() : $3->parameters;
+			if(!(ptr->parameters == temp_arg_list)) prnt_err("Function arguments don't match with declared parameter types");
+		}
 
 		// function type checking here
 
@@ -734,10 +788,13 @@ factor:
 		append($3, nullptr);
 
 		$$ = $1;
+		$$->expression_type = $2->expression_type;
 
 		prnt("factor: LPAREN expression RPAREN", $$);
 	}
 	| CONST_INT {
+		$1->expression_type = "INT";
+
 		append($1, nullptr);
 
 		$$ = $1;
@@ -745,6 +802,8 @@ factor:
 		prnt("factor: CONST_INT", $$);
 	}
 	| CONST_FLOAT {
+		$1->expression_type = "FLOAT";
+
 		append($1, nullptr);
 
 		$$ = $1;
@@ -786,6 +845,8 @@ argument_list:
 	
 arguments:
 	arguments COMMA logic_expression {
+		$1->parameters.add_parameter($3->expression_type);
+		
 		append($1, $2);
 		append($2, $3);
 		append($3, nullptr);
@@ -798,6 +859,9 @@ arguments:
 		append($1, nullptr);
 
 		$$ = $1;
+		
+		$$->parameters.clear();
+		$$->parameters.add_parameter($1->expression_type);
 
 		prnt("arguments: arguments COMMA logic_expression", $$);
 	}

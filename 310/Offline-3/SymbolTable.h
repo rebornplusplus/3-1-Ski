@@ -17,14 +17,16 @@ class SymbolInfo {
 
     SymbolInfo* next;
 	ParameterList parameters;
+	string expression_type;
 
-    SymbolInfo(string _name="", string _type="") : name(_name), type(_type), next(nullptr) { }
+    SymbolInfo(string _name="", string _type="") : name(_name), type(_type), next(nullptr), expression_type("ERROR") { }
 
     SymbolInfo(const SymbolInfo &p) {
         name = p.name;
         type = p.type;
         next = nullptr;
 		parameters = p.parameters;
+		expression_type = p.expression_type;
     }
 
     void set_type(string _type) { type = _type; }
