@@ -80,6 +80,9 @@ void add_new_func_declaration(pointer_type type, pointer_type id) {
 		ob.set_type(type->get_type());
 		identifer_types.insert(ob);
 	}
+
+	temp_parameter_list.clear();
+	parameter_identifers = nullptr;
 }
 
 void add_new_func_definition(pointer_type type, pointer_type id) {
@@ -101,7 +104,7 @@ void add_new_func_definition(pointer_type type, pointer_type id) {
 			pointer_type ret = identifer_types.search(ob.get_name());
 			assert(ret != nullptr);	// this must hold!
 			if(ret->get_type() != type->get_type() or !(ret->parameters == ob.parameters)) {
-				prnt_err("Multiple declaration of " + ob.get_name());
+				prnt_err("Conflicting types for " + ob.get_name());
 			}
 			else {
 				ret->is_defined = true;

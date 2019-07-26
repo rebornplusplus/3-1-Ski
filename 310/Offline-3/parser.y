@@ -1,3 +1,11 @@
+/**
+ * Bison Parser for C subset
+ * Offline 3
+ * 
+ * Rafid Bin Mostofa
+ * Jul 26 2019 1728
+**/
+
 %{
 	#include <bits/stdc++.h>
 	#include "SymbolTable.h"
@@ -424,6 +432,9 @@ statement:
 		prnt("statement: PRINTLN LPAREN ID RPAREN SEMICOLON", $$);
 	}
 	| RETURN expression SEMICOLON {
+		if($2->expression_type == "VOID")
+			prnt_err("void types found in expression");
+		
 		append($1, $2);
 		append($2, $3);
 		append($3, nullptr);
@@ -477,7 +488,8 @@ variable:
 			pointer_type ptr = identifer_types.search($1->get_name());
 			assert(ptr);
 			$1->expression_type = ptr->get_type();
-			$1->expression_type.pop_back();	// for array*
+			if($1->expression_type.back() != '*') prnt_err("Idenitifer " + $1->get_name() + "[] not declared");
+			else $1->expression_type.pop_back();	// for array*
 		}
 
 		// array index here
@@ -653,14 +665,17 @@ factor:
 	}
 	| ID LPAREN argument_list RPAREN {
 		pointer_type ret = symbol_table.search($1->get_name());
-		if(ret == nullptr) prnt_err("Identifier " + $1->get_name() + " not declared");
+		if(ret == nullptr) prnt_err("Function " + $1->get_name() + " not declared");
 		else {
 			pointer_type ptr = identifer_types.search($1->get_name());
 			assert(ptr);
 			$1->expression_type = ptr->get_type();
 
-			temp_arg_list = ($3 == nullptr) ? ParameterList() : $3->parameters;
-			if(!(ptr->parameters == temp_arg_list)) prnt_err("Function arguments don't match with declared parameter types");
+			if(ptr->is_func == false) prnt_err("Function " + $1->get_name() + " not declared");
+			else {
+				temp_arg_list = ($3 == nullptr) ? ParameterList() : $3->parameters;
+				if(!(ptr->parameters == temp_arg_list)) prnt_err("Function arguments don't match with declared parameter types");
+			}
 		}
 
 		// function type checking here
