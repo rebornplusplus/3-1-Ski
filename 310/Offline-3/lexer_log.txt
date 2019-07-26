@@ -1,22 +1,36 @@
-Line No. 1: Token <ID> Lexeme func found
+Line No. 1: Token <ID> Lexeme x found
 
-Line No. 1: Token <LPAREN> Lexeme ( found
+Line No. 1: Token <COMMA> Lexeme , found
+
+Line No. 1: Token <ID> Lexeme y found
+
+Line No. 1: Token <COMMA> Lexeme , found
+
+Line No. 1: Token <ID> Lexeme z found
+
+Line No. 1: Token <SEMICOLON> Lexeme ; found
 
 Line No. 1: Token <ID> Lexeme a found
 
-Line No. 1: Token <RPAREN> Lexeme ) found
+Line No. 1: Token <SEMICOLON> Lexeme ; found
 
-Line No. 1: Token <LCURL> Lexeme { found
+Line No. 3: Token <ID> Lexeme foo found
 
-Line No. 2: Token <ID> Lexeme a found
+Line No. 3: Token <LPAREN> Lexeme ( found
 
-Line No. 2: Token <SEMICOLON> Lexeme ; found
+Line No. 3: Token <RPAREN> Lexeme ) found
 
-Line No. 3: Token <RCURL> Lexeme } found
+Line No. 3: Token <SEMICOLON> Lexeme ; found
 
-Line No. 5: Token <ID> Lexeme main found
+Line No. 5: Token <ID> Lexeme var found
 
 Line No. 5: Token <LPAREN> Lexeme ( found
+
+Line No. 5: Token <ID> Lexeme a found
+
+Line No. 5: Token <COMMA> Lexeme , found
+
+Line No. 5: Token <ID> Lexeme b found
 
 Line No. 5: Token <RPAREN> Lexeme ) found
 
@@ -24,93 +38,215 @@ Line No. 5: Token <LCURL> Lexeme { found
 
 Line No. 6: Token <ID> Lexeme a found
 
-Line No. 6: Token <LTHIRD> Lexeme [ found
+Line No. 6: Token <ADDOP> Lexeme + found
 
-Line No. 6: Token <CONST_INT> Lexeme 2 found
-
-Line No. 6: Token <RTHIRD> Lexeme ] found
-
-Line No. 6: Token <COMMA> Lexeme , found
-
-Line No. 6: Token <ID> Lexeme c found
-
-Line No. 6: Token <COMMA> Lexeme , found
-
-Line No. 6: Token <ID> Lexeme i found
-
-Line No. 6: Token <COMMA> Lexeme , found
-
-Line No. 6: Token <ID> Lexeme j found
+Line No. 6: Token <ID> Lexeme b found
 
 Line No. 6: Token <SEMICOLON> Lexeme ; found
 
-Line No. 6: Token <ID> Lexeme c found
+Line No. 7: Token <RCURL> Lexeme } found
 
-Line No. 6: Token <SEMICOLON> Lexeme ; found
+Line No. 9: Token <ID> Lexeme foo found
 
-Line No. 7: Token <ID> Lexeme a found
+Line No. 9: Token <LPAREN> Lexeme ( found
 
-Line No. 7: Token <LTHIRD> Lexeme [ found
+Line No. 9: Token <RPAREN> Lexeme ) found
 
-Line No. 7: Token <CONST_FLOAT> Lexeme 2.5 found
+Line No. 9: Token <LCURL> Lexeme { found
 
-Line No. 7: Token <RTHIRD> Lexeme ] found
-
-Line No. 7: Token <ASSIGNOP> Lexeme = found
-
-Line No. 7: Token <CONST_INT> Lexeme 1 found
-
-Line No. 7: Token <SEMICOLON> Lexeme ; found
-
-Line No. 8: Token <ID> Lexeme i found
-
-Line No. 8: Token <ASSIGNOP> Lexeme = found
-
-Line No. 8: Token <CONST_FLOAT> Lexeme 2.3 found
-
-Line No. 8: Token <SEMICOLON> Lexeme ; found
-
-Line No. 9: Token <ID> Lexeme j found
-
-Line No. 9: Token <ASSIGNOP> Lexeme = found
-
-Line No. 9: Token <CONST_INT> Lexeme 2 found
-
-Line No. 9: Token <MULOP> Lexeme % found
-
-Line No. 9: Token <CONST_FLOAT> Lexeme 3.7 found
-
-Line No. 9: Token <SEMICOLON> Lexeme ; found
-
-Line No. 10: Token <ID> Lexeme a found
+Line No. 10: Token <ID> Lexeme x found
 
 Line No. 10: Token <ASSIGNOP> Lexeme = found
 
-Line No. 10: Token <CONST_INT> Lexeme 4 found
+Line No. 10: Token <CONST_INT> Lexeme 2 found
 
 Line No. 10: Token <SEMICOLON> Lexeme ; found
 
-Line No. 11: Token <ID> Lexeme func found
+Line No. 11: Token <ID> Lexeme y found
 
-Line No. 11: Token <LPAREN> Lexeme ( found
+Line No. 11: Token <ASSIGNOP> Lexeme = found
 
-Line No. 11: Token <ID> Lexeme a found
+Line No. 11: Token <ID> Lexeme x found
 
-Line No. 11: Token <RPAREN> Lexeme ) found
+Line No. 11: Token <ADDOP> Lexeme - found
+
+Line No. 11: Token <CONST_INT> Lexeme 5 found
 
 Line No. 11: Token <SEMICOLON> Lexeme ; found
 
-Line No. 12: Token <ID> Lexeme b found
+Line No. 12: Token <RCURL> Lexeme } found
 
-Line No. 12: Token <ASSIGNOP> Lexeme = found
+Line No. 14: Token <ID> Lexeme main found
 
-Line No. 12: Token <CONST_INT> Lexeme 8 found
+Line No. 14: Token <LPAREN> Lexeme ( found
 
-Line No. 12: Token <SEMICOLON> Lexeme ; found
+Line No. 14: Token <RPAREN> Lexeme ) found
 
-Line No. 13: Token <CONST_INT> Lexeme 0 found
+Line No. 14: Token <LCURL> Lexeme { found
 
-Line No. 13: Token <SEMICOLON> Lexeme ; found
+Line No. 15: Token <ID> Lexeme a found
 
-Line No. 14: Token <RCURL> Lexeme } found
+Line No. 15: Token <LTHIRD> Lexeme [ found
+
+Line No. 15: Token <CONST_INT> Lexeme 2 found
+
+Line No. 15: Token <RTHIRD> Lexeme ] found
+
+Line No. 15: Token <COMMA> Lexeme , found
+
+Line No. 15: Token <ID> Lexeme c found
+
+Line No. 15: Token <COMMA> Lexeme , found
+
+Line No. 15: Token <ID> Lexeme i found
+
+Line No. 15: Token <COMMA> Lexeme , found
+
+Line No. 15: Token <ID> Lexeme j found
+
+Line No. 15: Token <SEMICOLON> Lexeme ; found
+
+Line No. 15: Token <ID> Lexeme d found
+
+Line No. 15: Token <SEMICOLON> Lexeme ; found
+
+Line No. 16: Token <ID> Lexeme a found
+
+Line No. 16: Token <LTHIRD> Lexeme [ found
+
+Line No. 16: Token <CONST_INT> Lexeme 0 found
+
+Line No. 16: Token <RTHIRD> Lexeme ] found
+
+Line No. 16: Token <ASSIGNOP> Lexeme = found
+
+Line No. 16: Token <CONST_INT> Lexeme 1 found
+
+Line No. 16: Token <SEMICOLON> Lexeme ; found
+
+Line No. 17: Token <ID> Lexeme a found
+
+Line No. 17: Token <LTHIRD> Lexeme [ found
+
+Line No. 17: Token <CONST_INT> Lexeme 1 found
+
+Line No. 17: Token <RTHIRD> Lexeme ] found
+
+Line No. 17: Token <ASSIGNOP> Lexeme = found
+
+Line No. 17: Token <CONST_INT> Lexeme 5 found
+
+Line No. 17: Token <SEMICOLON> Lexeme ; found
+
+Line No. 18: Token <ID> Lexeme i found
+
+Line No. 18: Token <ASSIGNOP> Lexeme = found
+
+Line No. 18: Token <ID> Lexeme a found
+
+Line No. 18: Token <LTHIRD> Lexeme [ found
+
+Line No. 18: Token <CONST_INT> Lexeme 0 found
+
+Line No. 18: Token <RTHIRD> Lexeme ] found
+
+Line No. 18: Token <ADDOP> Lexeme + found
+
+Line No. 18: Token <ID> Lexeme a found
+
+Line No. 18: Token <LTHIRD> Lexeme [ found
+
+Line No. 18: Token <CONST_INT> Lexeme 1 found
+
+Line No. 18: Token <RTHIRD> Lexeme ] found
+
+Line No. 18: Token <SEMICOLON> Lexeme ; found
+
+Line No. 19: Token <ID> Lexeme j found
+
+Line No. 19: Token <ASSIGNOP> Lexeme = found
+
+Line No. 19: Token <CONST_INT> Lexeme 2 found
+
+Line No. 19: Token <MULOP> Lexeme * found
+
+Line No. 19: Token <CONST_INT> Lexeme 3 found
+
+Line No. 19: Token <ADDOP> Lexeme + found
+
+Line No. 19: Token <LPAREN> Lexeme ( found
+
+Line No. 19: Token <CONST_INT> Lexeme 5 found
+
+Line No. 19: Token <MULOP> Lexeme % found
+
+Line No. 19: Token <CONST_INT> Lexeme 3 found
+
+Line No. 19: Token <RELOP> Lexeme < found
+
+Line No. 19: Token <CONST_INT> Lexeme 4 found
+
+Line No. 19: Token <LOGICOP> Lexeme && found
+
+Line No. 19: Token <CONST_INT> Lexeme 8 found
+
+Line No. 19: Token <RPAREN> Lexeme ) found
+
+Line No. 19: Token <LOGICOP> Lexeme || found
+
+Line No. 19: Token <CONST_INT> Lexeme 2 found
+
+Line No. 19: Token <SEMICOLON> Lexeme ; found
+
+Line No. 20: Token <ID> Lexeme d found
+
+Line No. 20: Token <ASSIGNOP> Lexeme = found
+
+Line No. 20: Token <ID> Lexeme var found
+
+Line No. 20: Token <LPAREN> Lexeme ( found
+
+Line No. 20: Token <CONST_INT> Lexeme 1 found
+
+Line No. 20: Token <COMMA> Lexeme , found
+
+Line No. 20: Token <CONST_INT> Lexeme 2 found
+
+Line No. 20: Token <MULOP> Lexeme * found
+
+Line No. 20: Token <CONST_INT> Lexeme 3 found
+
+Line No. 20: Token <RPAREN> Lexeme ) found
+
+Line No. 20: Token <ADDOP> Lexeme + found
+
+Line No. 20: Token <CONST_FLOAT> Lexeme 3.5 found
+
+Line No. 20: Token <MULOP> Lexeme * found
+
+Line No. 20: Token <CONST_INT> Lexeme 2 found
+
+Line No. 20: Token <SEMICOLON> Lexeme ; found
+
+Line No. 21: Token <ID> Lexeme added found
+
+Line No. 21: Token <ASSIGNOP> Lexeme = found
+
+Line No. 21: Token <ID> Lexeme foo found
+
+Line No. 21: Token <LPAREN> Lexeme ( found
+
+Line No. 21: Token <RPAREN> Lexeme ) found
+
+Line No. 21: Token <MULOP> Lexeme * found
+
+Line No. 21: Token <CONST_INT> Lexeme 2 found
+
+Line No. 21: Token <SEMICOLON> Lexeme ; found
+
+Line No. 22: Token <CONST_INT> Lexeme 0 found
+
+Line No. 22: Token <SEMICOLON> Lexeme ; found
+
+Line No. 23: Token <RCURL> Lexeme } found
 

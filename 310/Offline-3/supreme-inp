@@ -1,15 +1,21 @@
-void foo() {
-	return bar;
-}
-
-int bar(int x) {
+int bar(float x) {
 	if(x < 0) return -x;
 	return x;
 }
 
-int oops;
+void foo() {
+	return bar;
+}
 
-void oops(int pos) {
+// int oops;
+
+int oops() {
+	return 0;
+}
+
+int oops(int pos) {
+	int pos;
+	pos = 5;
 	oops = pos * 9 + 2.5;
 }
 
@@ -19,9 +25,15 @@ int func(int a, int b, int c) {
 	return a - bar(b) + c;
 }
 
-void func(int a, float b, int c) {
+int func(int a, float b, int c) {
 	return a - bar(b) + c;
 }
+
+int func(int p, float r, int q) {
+	return p - q;
+}
+
+int arr[100];
 
 int main(void) {
 	int x, y;
@@ -30,9 +42,16 @@ int main(void) {
 	x = 2;
 	y = x * 45;
 	z = x * y / 1.0 * 0.5;
+	
+	arr[z] = x;
+	arr[x > z] = y;
+	arr[y > z*2.0] = z;
 
-	int some_val;
+	float some_val;
 	some_val = func(x, z, y);
+
+	foo = foo() % 2;
+	foo();
 
 	int i, odd, even;
 	odd = 0;

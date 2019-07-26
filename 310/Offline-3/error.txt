@@ -1,12 +1,33 @@
-Error at line 6: Multiple declaration of c
-Error at line 7: Non-integer array index
-Error at line 7: INT = INT
-Error at line 8: Type conversion
-Error at line 8: INT = FLOAT
-Error at line 9: Non-integer operand on modulus operator
-Error at line 9: INT = ERROR
-Error at line 10: Type conversion
-Error at line 10: INT* = INT
-Error at line 11: Function arguments don't match with declared parameter types
-Error at line 12: Identifier b not declared
-Error at line 12: ERROR = INT
+Error at line 7: Identifier bar is a function. Missing arguments
+
+Error at line 16: Re-definition of oops
+
+Error at line 17: Multiple declaration of pos
+
+Error at line 19: Identifier oops is a function. Missing arguments
+
+Error at line 24: Multiple declaration of func
+
+Error at line 25: Function arguments don't match with declared parameter types
+
+Error at line 32: Re-definition of func
+
+Error at line 46: Non-integer array index
+
+Error at line 48: Type conversion
+
+Error at line 51: Type conversion
+
+Error at line 53: Identifier foo is a function. Missing arguments
+
+Error at line 53: void types found in expression
+
+Error at line 66: Identifier cnt not declared
+
+Error at line 67: Identifier cnt not declared
+
+Error at line 69: Identifier cnt not declared
+
+Error at line 70: Identifier cnt not declared
+
+Total errors: 16

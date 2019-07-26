@@ -14,7 +14,7 @@
 %{
 	#include <bits/stdc++.h>
 	#include "SymbolTable.h"
-	#include "parser.tab.h"
+	#include "1605109.tab.h"
 	using namespace std;
 	
 	/* total errors */
