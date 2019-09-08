@@ -753,7 +753,8 @@ term:
 unary_expression:
 	ADDOP unary_expression {
 		
-		$$ = $2;
+		$$ = new SymbolInfo($2);
+		$$->symbol = newTemp();
 		if($1->symbol == "-") {
 			$$->code += "MOV AX, 0\n";
 			$$->code += "SUB AX, " + $2->symbol + "\n";
@@ -763,7 +764,8 @@ unary_expression:
 	}
 	| NOT unary_expression {
 		
-		$$ = $2;
+		$$ = new SymbolInfo($2);
+		$$->symbol = newTemp();
 		$$->code += "MOV AX, " + $2->symbol + "\n";
 		$$->code += "NOT AX\n";
 		$$->code += "MOV " + $$->symbol + ", AX\n";
