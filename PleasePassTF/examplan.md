@@ -1,7 +1,7 @@
 # 3-1 Term Finals
 _- A genuinely concerned kid_
 
-# Micro Controllers and Processors
+## Micro Controllers and Processors
 
 __Tarek sir__
 - Slides all - pass using this
@@ -9,7 +9,7 @@ __Tarek sir__
 __Eusuf sir__
 - Assembly
 
-# Computer Architecture
+## Computer Architecture
 
 __Mahin mam__ 
 - Whole
@@ -17,7 +17,7 @@ __Mahin mam__
 __Sohel sir__ 
 - Later
 
-# Data Com
+## Data Com
 
 __Wasif sir__ 
 - Chotha (Sahil)
@@ -28,7 +28,7 @@ __Monir sir__
 - Chapter 6, A big NO!
 - Chapter 3 time paile
 
-# Compilers
+## Compilers
 
 __Mashrur sir__ 
 - purata, follow slides
@@ -38,7 +38,7 @@ __KMS__
 - Chapter 6 time paile
 - Chapter 7 theoretical coding
 
-# Soft Engg.
+## Soft Engg.
 
 __Anindya sir__ 
 - purata, follow slides
